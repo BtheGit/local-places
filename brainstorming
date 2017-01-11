@@ -1,0 +1,12 @@
+App -> Menu -> [Map; Adminpage; (DetailPage -> DetailAdminPage)]
+(If I switched to redux, menu and map could be parallel)
+
+Menu
+-----
+
+Manage Database (Import data)
+Build List
+Generate Markers
+Select List Entry (Highlight on Map, pop out infowindow, infowindow leads to detail page)  - pass as a callback to map
+Hover list entry (CSS only?) - needs to also highlight corresponding map marker if visible (or maybe even if not, performance question)
+

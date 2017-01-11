@@ -4,7 +4,7 @@ var path = require('path');
 module.exports = {
 
 	entry: {
-		app: './src/App.js'
+		app: './src/index.js'
 	},
 	output: {
 		filename: 'build/bundle.js',
@@ -18,7 +18,7 @@ module.exports = {
 				exclude: /(node_modules|bower_components)/,
 				loader: 'babel',
 				query:{
-					presets:['react', 'es2015']
+					presets:['react', 'es2015', 'stage-0']
 				}
 			}
 		]
