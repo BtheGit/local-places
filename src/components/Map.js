@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
+import { populateMarkers, highlightPlace, unhighlightPlace, asyncHighlightPlace } from '../actions/actions'
+import { connect } from 'react-redux';
 
-export default class Map extends Component {
+class Map extends Component {
 	constructor(props){
 		super(props)
 
 		this.state = {
 			defaultMarker: this.makeMarkerIcon('55BB00'),
         	highlightedMarker: this.makeMarkerIcon('FFFF24'),
-            markersArray: []
 
 		}
 	}
 
-	buildMarkers(markers) {
+	buildMarkers(places) {
 		let self = this;
 		const markersArray = [];
-		for (let i = 0; i < markers.length; i++) {
+		for (let i = 0; i < places.length; i++) {
 
 	        const marker = new google.maps.Marker({
-	          position: markers[i].position,
-	          map: this.map,
-	          icon: this.state.defaultMarker,
-	          animation: google.maps.Animation.DROP,
-	          title: markers[i].title,
-	          id: i
+				position: places[i].position,
+				title: places[i].title,
+				address: places[i].address || '',
+				rating: places[i].rating || 'none',
+				description: places[i].description || '',
+				map: this.map,
+				icon: this.state.defaultMarker,
+				animation: google.maps.Animation.DROP,
+				id: places[i].id
 	        });
 
 	        markersArray.push(marker);
@@ -34,19 +38,22 @@ export default class Map extends Component {
 
 	        marker.addListener('mouseover', () => {
 	        	marker.setIcon(this.state.highlightedMarker);
+	        	this.props.dispatch(asyncHighlightPlace(marker.id));
 	        });
 
 	        marker.addListener('mouseout', () => {
 	        	//to avoid overwriting the highlighted bouncing effect too soon
 	        	if(marker.animation === null){
-	 	        	marker.setIcon(this.state.defaultMarker);       		
+	 	        	marker.setIcon(this.state.defaultMarker);
+	 	        	this.props.dispatch(unhighlightPlace());       		
 	        	}
 	        });        	
         }
-        this.setState({markersArray});
+        this.props.dispatch(populateMarkers(markersArray));
 	}
 
     populateInfoWindow(marker, infowindow) {
+    	console.log(marker);
     	if (infowindow.marker != marker) {
     		infowindow.setContent('');
     		infowindow.marker = marker;
@@ -57,7 +64,16 @@ export default class Map extends Component {
     			marker.setIcon(this.state.defaultMarker)
     			infowindow.marker = null;
     		});
-    	infowindow.setContent(marker.title + '!!');
+
+    	const newContent = '<div class="iwContainer">' +
+    							 '<div class="iwTitle">' + marker.title + '</div>' +
+    							 '<br>' +
+    							 '<div class="iwRating">Rating: ' + marker.rating + '</div>' +
+    							 '<div class="iwDescription">' + marker.description + '</div>' +
+    							 '<br>' +
+    							 '<div class="iwAddress"Address: >' + marker.address + '</div>' +
+    						'</div>';
+    	infowindow.setContent(newContent);
         infowindow.open(map, marker);
 
     	}
@@ -86,20 +102,28 @@ export default class Map extends Component {
 	//+++++++++++++++++REACT LIFECYCLE FUNCTIONS++++++++++++++++++++++++
 
 	shouldComponentUpdate() {
+		//do not let the map continue to rebuild on every update to Map component. instead updates will be handled by 
+		//componentDidReceiveProps instead
+		//question: does this mean I should not bind props to state here and instead only pass props to Map from App,
+		//by binding am I negating the benefits of minimal component updates?
 		return false;
 	}
 
 	componentDidMount() {
+		//build generic infowindow
 		this.largeInfowindow = new google.maps.InfoWindow();
 
+		//build and populate map
         this.map = new google.maps.Map(this.refs.map, {
-          center: this.props.center,
-          zoom: this.props.zoom,
+          center: this.props.maps.startLocation,
+          zoom: this.props.maps.zoomLevel,
           mapTypeControl: false,
-          styles: this.props.styles
+          styles: this.props.maps.styles
         });
 
-        this.buildMarkers(this.props.markers)
+        //build markers and associate them with custom infowindows and color schemes, populate an array of them
+        //later calls to the database will take the place of static placesArray (prior to the that, need to use static API JSON file)
+        this.buildMarkers(this.props.maps.placesArray)
 
 
 	}
@@ -115,3 +139,10 @@ export default class Map extends Component {
 	}
 }
 
+function mapStateToProps(state) {
+  return {
+    maps: state.maps
+  };
+}
+
+export default connect(mapStateToProps)(Map);

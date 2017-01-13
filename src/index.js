@@ -1,16 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import { maps } from './reducers/index';
 import App from './App';
 import './index.css';
 
-const store = createStore(
-  combineReducers({
-    maps
-  })
-);
+const store = applyMiddleware(thunk)(createStore)(combineReducers({maps}));
 
 const root = document.getElementById('root');
 

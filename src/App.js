@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Places from './components/Places';
 import Map from './components/Map';
 import { connect } from 'react-redux';
+import { selectMarker } from './actions/actions'
+
 
 
 
@@ -18,25 +20,29 @@ class App extends Component {
 
 	}
 
-	selectMenuItem(marker) {
-		console.log(marker)
+	selectMenuItem(place) {
+		//locate corresponding marker when place is selected to highlight it
+		const selectedMarker = this.props.maps.markersArray.filter((marker, index) => {
+			if (marker.id === place.id) {
+				return marker;
+			}
+		})
+		this.props.dispatch(selectMarker(selectedMarker[0].id))
+		
 	}
+
+
 
 	render(){
 
 		return (
 			<div>
 				<div style={{width: window.innerWidth * .5, height: window.innerHeight * .98, float: 'left'}}>
-					<Map 
-						center={this.props.maps.startLocation}
-						markers={this.props.maps.markers}
-						zoom={this.props.maps.zoomLevel}
-						styles={this.props.maps.styles}
-					/>		
+					<Map />		
 				</div>
 				<div style={{width: window.innerWidth * .3, height: '100%', float: 'right', top: 0, right: 0}}>
 					<Places
-						placesArray={this.props.maps.markers}
+						placesArray={this.props.maps.placesArray}
 						selectMenuItem={this.selectMenuItem}
 					/>
 				</div>
