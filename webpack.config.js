@@ -1,6 +1,7 @@
 var webpack = require("webpack");
 var path = require('path');
 
+
 module.exports = {
 
 	entry: {
@@ -10,7 +11,7 @@ module.exports = {
 		filename: 'build/bundle.js',
         sourceMapFilename: 'build/bundle.map'
 	},
-	devtool: '#source-map',	
+	devtool: 'source-map',	
 	module: {
 		loaders: [
 			{
@@ -18,9 +19,13 @@ module.exports = {
 				exclude: /(node_modules|bower_components)/,
 				loader: 'babel',
 				query:{
-					presets:['react', 'es2015', 'stage-0']
+					presets:['es2015', 'react', 'stage-0']
 				}
-			}
+			},
+			{ 
+      			test: /\.css$/, 
+      			loader: 'style-loader!css-loader' 
+      		}
 		]
 	}
 }

@@ -22,6 +22,7 @@ const initialState = {
       // {"featureType":"poi.school","elementType":"geometry.fill","stylers":[{"color":"#BF0000"}]},
       // {"featureType":"transit.line","elementType":"geometry.fill","stylers":[{"saturation":-100}]}
     ],
+    placesList: [],
     highlightedPlaceID: '',
     markersArray: []
 
@@ -37,6 +38,11 @@ const maps = (state = initialState, action) => {
       return({
         ...state,
         markersArray: action.payload
+      })
+    case 'POPULATE_PLACESLIST':
+      return({
+        ...state,
+        placesList: action.payload
       })
     case 'SELECT_MARKER':
       return ({

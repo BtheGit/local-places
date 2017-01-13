@@ -12,6 +12,13 @@ export function populateMarkers(markersArray) {
   }
 }
 
+export function populatePlacesList(placesList) {
+  return {
+    type: 'POPULATE_PLACESLIST',
+    payload: placesList
+  }
+}
+
 export function highlightPlace(placeID) {
   return {
     type: 'HIGHLIGHT_PLACE',
@@ -42,3 +49,18 @@ export function asyncHighlightPlace(placeID) {
     console.log('highlighted')
   }
 }
+
+export function asyncUnhighlightPlace(placeID) {
+  return function (dispatch) {
+    dispatch(unhighlightPlace());
+    console.log('unhighlighted')
+  }
+}
+
+export function asyncPopulatePlacesList(placesList) {
+  return function (dispatch) {
+    dispatch(populatePlacesList(placesList));
+    console.log('populated places')
+  }
+}
+

@@ -1,0 +1,7 @@
+.places-place {
+	list-style: none;
+}
+
+.places-place:hover {
+	background-color: yellow;
+}

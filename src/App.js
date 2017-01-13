@@ -28,7 +28,7 @@ class App extends Component {
 			}
 		})
 		this.props.dispatch(selectMarker(selectedMarker[0].id))
-		
+
 	}
 
 
@@ -40,9 +40,8 @@ class App extends Component {
 				<div style={{width: window.innerWidth * .5, height: window.innerHeight * .98, float: 'left'}}>
 					<Map />		
 				</div>
-				<div style={{width: window.innerWidth * .3, height: '100%', float: 'right', top: 0, right: 0}}>
+				<div style={{width: window.innerWidth * .45, height: '100%', float: 'right', top: 0, right: 0}}>
 					<Places
-						placesArray={this.props.maps.placesArray}
 						selectMenuItem={this.selectMenuItem}
 					/>
 				</div>

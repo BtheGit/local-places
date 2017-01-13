@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { populateMarkers, highlightPlace, unhighlightPlace, asyncHighlightPlace } from '../actions/actions'
+import { populateMarkers, highlightPlace, unhighlightPlace, asyncHighlightPlace, asyncUnhighlightPlace } from '../actions/actions'
 import { connect } from 'react-redux';
 
 class Map extends Component {
@@ -45,7 +45,7 @@ class Map extends Component {
 	        	//to avoid overwriting the highlighted bouncing effect too soon
 	        	if(marker.animation === null){
 	 	        	marker.setIcon(this.state.defaultMarker);
-	 	        	this.props.dispatch(unhighlightPlace());       		
+	 	        	this.props.dispatch(asyncUnhighlightPlace());       		
 	        	}
 	        });        	
         }
@@ -129,7 +129,7 @@ class Map extends Component {
 	}
 
 	componentDidReceiveProps() {
-
+		//this is where we can update the component when store state changes
 	}
 
 	render() {
