@@ -43,24 +43,51 @@ export function deselectMarker() {
   }
 }
 
+export function addMarkerIcon(key, icon) {
+  return {
+    type: 'ADD_MARKERICON',
+    key: key,
+    icon: icon
+  }
+}
+
+export function focusInfoWindow(marker) {
+  return {
+    type: 'FOCUS_INFOWINDOW',
+    payload: marker
+  }
+}
+
+export function clearInfoWindow(){
+  return {
+    type: 'CLEAR_INFOWINDOW'
+  }
+}
+
 export function asyncHighlightPlace(placeID) {
   return function (dispatch) {
     dispatch(highlightPlace(placeID));
-    console.log('highlighted')
   }
 }
 
 export function asyncUnhighlightPlace(placeID) {
   return function (dispatch) {
     dispatch(unhighlightPlace());
-    console.log('unhighlighted')
   }
 }
 
 export function asyncPopulatePlacesList(placesList) {
   return function (dispatch) {
     dispatch(populatePlacesList(placesList));
-    console.log('populated places')
   }
 }
 
+export function asyncAddMarkerIcon(key, icon) {
+  return function (dispatch) {
+    dispatch(addMarkerIcon(key, icon));
+  }
+}
+
+export function asyncSelectMenuItem() {
+  return
+}

@@ -24,7 +24,10 @@ const initialState = {
     ],
     placesList: [],
     highlightedPlaceID: '',
-    markersArray: []
+    markersArray: [],
+    markerIcons: {},
+    infoWindowIsActive: false,
+    activeInfoWindow: {},
 
 };
 
@@ -44,16 +47,38 @@ const maps = (state = initialState, action) => {
         ...state,
         placesList: action.payload
       })
+    case 'ADD_MARKERICON':
+      return ({
+        ...state,
+        markerIcons: {
+          ...state.markerIcons,
+          [action.key]: action.icon
+        }
+      })
     case 'SELECT_MARKER':
       return ({
         ...state,
         markerIsSelected: true,
+        infoWindowIsActive: true,
         selectedMarker: action.payload
       })
     case 'DESELECT_MARKER':
       return ({
         ...state,
+        infoWindowIsActive: false,
         markerIsSelected: false
+      })
+    case 'FOCUS_INFOWINDOW': 
+      return({
+        ...state,
+        infoWindowIsActive: true,
+        activeInfoWindow: action.payload
+      })
+    case 'CLEAR_INFOWINDOW':
+      return({
+        ...state,
+        infoWindowIsActive: false,
+        activeInfoWindow: {}
       })
     default:
       return state;

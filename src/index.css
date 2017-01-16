@@ -5,3 +5,11 @@
 .places-place:hover {
 	background-color: yellow;
 }
+
+.places-place-manualHover {
+	background-color: yellow;
+}
+
+.places-place-selected {
+	background-color: orange;
+}

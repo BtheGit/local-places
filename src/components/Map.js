@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import { populateMarkers, highlightPlace, unhighlightPlace, asyncHighlightPlace, asyncUnhighlightPlace } from '../actions/actions'
+import { populateMarkers, highlightPlace, unhighlightPlace, asyncHighlightPlace, asyncUnhighlightPlace, asyncAddMarkerIcon } from '../actions/actions'
 import { connect } from 'react-redux';
 
 class Map extends Component {
 	constructor(props){
 		super(props)
 
-		this.state = {
-			defaultMarker: this.makeMarkerIcon('55BB00'),
-        	highlightedMarker: this.makeMarkerIcon('FFFF24'),
-
-		}
 	}
 
 	buildMarkers(places) {
+
 		let self = this;
 		const markersArray = [];
 		for (let i = 0; i < places.length; i++) {
@@ -25,29 +21,33 @@ class Map extends Component {
 				rating: places[i].rating || 'none',
 				description: places[i].description || '',
 				map: this.map,
-				icon: this.state.defaultMarker,
+				icon: this.props.maps.markerIcons.default || this.makeMarkerIcon('55BB00'), //this tends to start too early, need to patch async
 				animation: google.maps.Animation.DROP,
 				id: places[i].id
 	        });
 
-	        markersArray.push(marker);
      
 	        marker.addListener('click', function() {
 	          self.populateInfoWindow(this, self.largeInfowindow);
 	        });
 
-	        marker.addListener('mouseover', () => {
-	        	marker.setIcon(this.state.highlightedMarker);
+	        marker.addListener('mouseover', (target) => {
+	        	document.getElementById('place' + marker.id).classList.add('places-place-manualHover'); //hover PlacesList elem
+	        	marker.setIcon(this.props.maps.markerIcons.highlighted);
 	        	this.props.dispatch(asyncHighlightPlace(marker.id));
 	        });
 
 	        marker.addListener('mouseout', () => {
 	        	//to avoid overwriting the highlighted bouncing effect too soon
 	        	if(marker.animation === null){
-	 	        	marker.setIcon(this.state.defaultMarker);
+	        		document.getElementById('place' + marker.id).classList.remove('places-place-manualHover'); 
+	 	        	marker.setIcon(this.props.maps.markerIcons.default);
 	 	        	this.props.dispatch(asyncUnhighlightPlace());       		
 	        	}
-	        });        	
+	        });     
+
+   	        markersArray.push(marker);
+   	
         }
         this.props.dispatch(populateMarkers(markersArray));
 	}
@@ -58,10 +58,10 @@ class Map extends Component {
     		infowindow.setContent('');
     		infowindow.marker = marker;
     		this.toggleBounce(marker);
-    		marker.setIcon(this.state.highlightedMarker)
+    		marker.setIcon(this.props.maps.markerIcons.highlighted)
     		infowindow.addListener('closeclick', () => {
     			marker.setAnimation(null);
-    			marker.setIcon(this.state.defaultMarker)
+    			marker.setIcon(this.props.maps.markerIcons.default)
     			infowindow.marker = null;
     		});
 
@@ -120,6 +120,9 @@ class Map extends Component {
           mapTypeControl: false,
           styles: this.props.maps.styles
         });
+        //build action/reducer for pushing markerIcons to store object
+       	this.props.dispatch(asyncAddMarkerIcon('default', this.makeMarkerIcon('55BB00')));
+       	this.props.dispatch(asyncAddMarkerIcon('highlighted', this.makeMarkerIcon('FFFF24')));
 
         //build markers and associate them with custom infowindows and color schemes, populate an array of them
         //later calls to the database will take the place of static placesArray (prior to the that, need to use static API JSON file)
@@ -128,8 +131,17 @@ class Map extends Component {
 
 	}
 
-	componentDidReceiveProps() {
+	componentWillReceiveProps() {
+		// console.log(this.props.maps.activeInfoWindow)
+		// console.log(this.props)
+		// console.log(this.props.maps.markersArray[0])
+		// this.populateInfoWindow(this.props.maps.activeInfoWindow || this.props.maps.markersArray[0], self.largeInfowindow)
 		//this is where we can update the component when store state changes
+		//need to detect when List item is selected and infowindow is called
+		// if(this.props.maps.activeInfoWindow !== undefined && this.props.maps.activeInfoWindow !== {}) {
+		// 	console.log('focusing')
+		// 	this.populateInfoWindow(this.props.maps.activeInfoWindow, self.largeInfowindow)
+		// }
 	}
 
 	render() {

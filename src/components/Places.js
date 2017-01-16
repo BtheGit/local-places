@@ -11,8 +11,18 @@ class Places extends Component {
 	showPlaces(placesArray) {
 		const placesList = [];
 		for (let i = 0; i < placesArray.length; i++) {
-			// placesList.push(<li key={i} onClick={()=> this.highlightPlace(placesArray[i])}>{placesArray[i].title}</li>)
-			placesList.push(<li key={i} className='places-place' id={'place' + i} onClick={()=> this.props.selectMenuItem(placesArray[i])}>{placesArray[i].title}</li>)
+
+			const placeId = 'place' + (i + 1) //id and arrayposition are off by one.
+			placesList.push(<li 
+								key={i} 
+								className='places-place' 
+								id={placeId} 
+								onClick={()=> this.props.selectMenuItem(placesArray[i])}
+								onMouseOver={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.highlighted)}
+								onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.default)}
+							>
+								{placesArray[i].title}
+							</li>)
 		}
 		return placesList;
 	}
@@ -40,7 +50,6 @@ class Places extends Component {
 	}
 
 	highlightPlace(key) {
-		console.log(key);
 	} 
 
 	//############### END eventlisteners functions #################
