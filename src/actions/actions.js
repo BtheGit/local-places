@@ -19,6 +19,13 @@ export function populatePlacesList(placesList) {
   }
 }
 
+export function loadInfoWindow(infoWindow) {
+  return {
+    type: 'LOAD_INFOWINDOW',
+    payload: infoWindow
+  }
+}
+
 export function highlightPlace(placeID) {
   return {
     type: 'HIGHLIGHT_PLACE',

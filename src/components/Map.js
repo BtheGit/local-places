@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { populateMarkers, highlightPlace, unhighlightPlace, asyncHighlightPlace, asyncUnhighlightPlace, asyncAddMarkerIcon } from '../actions/actions'
+import { 
+	populateMarkers, 
+	highlightPlace, 
+	unhighlightPlace, 
+	asyncHighlightPlace, 
+	asyncUnhighlightPlace, 
+	asyncAddMarkerIcon, 
+	loadInfoWindow 
+} from '../actions/actions'
 import { connect } from 'react-redux';
 
 class Map extends Component {
@@ -28,10 +36,15 @@ class Map extends Component {
 
      
 	        marker.addListener('click', function() {
-	          self.populateInfoWindow(this, self.largeInfowindow);
+	          self.populateInfoWindow(marker, self.largeInfowindow);
+	          self.props.highlightSelectedPlace(marker.id)
+	          // self.populateInfoWindow(marker, this.props.maps.infoWindow);
+
+	          	// document.getElementById('place' + marker.id).classList.toggle('places-place-selected'); 
+	          	// needs to be implemented correctly
 	        });
 
-	        marker.addListener('mouseover', (target) => {
+	        marker.addListener('mouseover', () => {
 	        	document.getElementById('place' + marker.id).classList.add('places-place-manualHover'); //hover PlacesList elem
 	        	marker.setIcon(this.props.maps.markerIcons.highlighted);
 	        	this.props.dispatch(asyncHighlightPlace(marker.id));
@@ -75,6 +88,7 @@ class Map extends Component {
     						'</div>';
     	infowindow.setContent(newContent);
         infowindow.open(map, marker);
+        console.log(infowindow);
 
     	}
     }
@@ -112,6 +126,7 @@ class Map extends Component {
 	componentDidMount() {
 		//build generic infowindow
 		this.largeInfowindow = new google.maps.InfoWindow();
+		this.props.dispatch(loadInfoWindow(new google.maps.InfoWindow()))
 
 		//build and populate map
         this.map = new google.maps.Map(this.refs.map, {

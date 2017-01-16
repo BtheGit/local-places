@@ -13,16 +13,18 @@ class Places extends Component {
 		for (let i = 0; i < placesArray.length; i++) {
 
 			const placeId = 'place' + (i + 1) //id and arrayposition are off by one.
-			placesList.push(<li 
-								key={i} 
-								className='places-place' 
-								id={placeId} 
-								onClick={()=> this.props.selectMenuItem(placesArray[i])}
-								onMouseOver={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.highlighted)}
-								onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.default)}
-							>
-								{placesArray[i].title}
-							</li>)
+			placesList.push(
+				<li 
+					key={i} 
+					className='places-place' 
+					id={placeId} 
+					onClick={()=> this.props.selectMenuItem(placesArray[i])}
+					onMouseOver={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.highlighted)}
+					onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.default)}
+				>
+					{placesArray[i].title}
+				</li>
+			)
 		}
 		return placesList;
 	}

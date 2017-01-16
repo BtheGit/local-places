@@ -26,6 +26,7 @@ const initialState = {
     highlightedPlaceID: '',
     markersArray: [],
     markerIcons: {},
+    infoWindow: '',    
     infoWindowIsActive: false,
     activeInfoWindow: {},
 
@@ -46,6 +47,11 @@ const maps = (state = initialState, action) => {
       return({
         ...state,
         placesList: action.payload
+      })
+    case 'LOAD_INFOWINDOW':
+      return({
+        ...state,
+        infoWindow: action.payload
       })
     case 'ADD_MARKERICON':
       return ({

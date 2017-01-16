@@ -31,23 +31,25 @@ class App extends Component {
 	}
 
 	selectMenuItem(place) {
+		//place is an object representing a PLACE database entry
+
 		//logic for selecting one listItem at a time by adding CSS class. get all previous items with class instance
 		//and clear them out and then add new one. Is there a smarter way to do this? This will need to be replaced when 
 		//clicking the item causes an expansion rather than just a visual change.
 
-		this.highlightSelectedPlace(place);
+		this.highlightSelectedPlace(place.id);
 		this.selectMapMarker(place);
 
 	}
 
-	highlightSelectedPlace = place => {
+	highlightSelectedPlace = placeId => {
 		const selectedElems = document.getElementsByClassName('places-place-selected');
 		if(selectedElems.length > 0){
 			for (let i =0; i < selectedElems.length; i++) {
 				selectedElems[i].classList.remove('places-place-selected');
 			}
 		}
-		const placeElem = document.getElementById('place' + place.id);
+		const placeElem = document.getElementById('place' + placeId);
 		placeElem.classList.add('places-place-selected');
 
 	}
@@ -60,6 +62,7 @@ class App extends Component {
 			<div>
 				<div style={{width: window.innerWidth * .5, height: window.innerHeight * .98, float: 'left'}}>
 					<Map 
+						highlightSelectedPlace={this.highlightSelectedPlace}
 					/>		
 				</div>
 				<div style={{width: window.innerWidth * .45, height: '100%', float: 'right', top: 0, right: 0}}>
