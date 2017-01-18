@@ -8,12 +8,15 @@ class Sidebar extends Component {
 		super(props)
 
 	}
+	//TODO add higher level function here to pass to Collapsible using handleTriggerClick property
+	//to store the clicked item so that it can be remembered and closed before the next one is opened
+
 
 	showPlaces(placesArray) {
 		const placesList = [];
 		for (let i = 0; i < placesArray.length; i++) {
-
-			const placeId = 'place' + (i + 1) //id and array position are off by one.
+			const id = Number(JSON.stringify(JSON.parse(i))) + 1
+			const placeId = 'place' + id //id and array position are off by one.
 			placesList.push(
 
 				<div
@@ -30,7 +33,7 @@ class Sidebar extends Component {
 						classParentString={'collapsible-container'}
 					>
 						<p>{placesArray[i].summary}</p>
-						<a className="btn btn-primary" onClick={(e) => this.props.dispatch(viewPlacescreen(placeId))}>Detail</a>
+						<a className="btn btn-primary" onClick={(e) => this.props.dispatch(viewPlacescreen(id))}>Detail</a>
 					</Collapsible>
 				</div>
 

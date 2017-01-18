@@ -16,7 +16,7 @@ const places =  [
     id: 2, 
     position: {lat: 22.624695, lng: 120.307813},
     title: "Brendan's House", 
-    summary: '', 
+    summary: 'The home of this website.', 
   },
   {
     id: 3, 

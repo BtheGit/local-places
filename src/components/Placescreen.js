@@ -6,11 +6,24 @@ class Place extends Component {
 		super(props);
 	}
 
+	renderPlace(place) {
+		return(
+			<div>
+				<h1>{place.title}</h1>
+				<p>Rating: {place.rating}</p>
+				<br/>
+				<h3>{place.summary}</h3>
+				<br/>
+				<span>{place.description || ''}</span>
+			</div>
+		)
+	}
+
+
 	render() {
 		return (
 			<div className="placescreen">
-				<h1>Place Screen</h1> 
-				<p>{this.props.placeId}</p>
+				{this.renderPlace(this.props.place[0])}
 				<a className="btn btn-primary" onClick={(e) => this.props.dispatch(hidePlacescreen())}>Close</a>
 			</div>
 		)

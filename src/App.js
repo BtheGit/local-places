@@ -52,7 +52,7 @@ class App extends Component {
 
 	}
 
-	//not currently used
+	//CURRENTLY UNUSED
 	selectMapMarker(place) {
 		//locate corresponding marker when place is selected to highlight it
 		const selectedMarker = this.props.maps.markersArray.filter((marker, index) => {
@@ -182,11 +182,19 @@ class App extends Component {
       }
 
     renderPlacescreen(){
+    	//Because react doesn't let you pass an object as a child, array.filter returns an array with one element
+    	//whereas array.find would return the object itself. I then extract the first element in the child component
+    	const currentPlace = this.props.maps.placesArray.filter((place) => {
+    		return place.id === this.props.maps.placescreenID
+    	})
+
+
     	return (
-    		<Placescreen 
-    			placeId={this.props.maps.placescreenID}
+    		<Placescreen
+    			place={currentPlace}
     			dispatch={this.props.dispatch}
-    		/>
+    		>
+    		</Placescreen>
     	)
     }
 
@@ -195,7 +203,7 @@ class App extends Component {
 			return (
 				<div id="app-wrapper">
 					<div id="map-component">
-					{this.props.maps.placescreenActive ? this.renderPlacescreen() : false}
+						{this.props.maps.placescreenActive ? this.renderPlacescreen() : false}
 						<Mapscreen
 							markers={this.props.maps.markersArray}
 						/>
