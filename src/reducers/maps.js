@@ -24,6 +24,8 @@ const initialState = {
     infoWindow: '',    
     infoWindowIsActive: false,
     activeInfoWindow: {},
+    placescreenActive: false,
+    placescreenID: 0
 
 };
 
@@ -69,6 +71,12 @@ const maps = (state = initialState, action) => {
         ...state,
         infoWindowIsActive: false,
         markerIsSelected: false
+      })
+    case 'VIEW_PLACESCREEN':
+      return ({
+        ...state,
+        placescreenActive: true,
+        placescreenID: action.payload
       })
     case 'FOCUS_INFOWINDOW': 
       return({

@@ -63,7 +63,7 @@ html, body, {
 
 
 .sidebar-place-manualHover {
-	background-color: yellow;
+	background-color: yellow !important;
 }
 
 .sidebar-place-selected {

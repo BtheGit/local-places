@@ -13,7 +13,7 @@ class Sidebar extends Component {
 		const placesList = [];
 		for (let i = 0; i < placesArray.length; i++) {
 
-			const placeId = 'sidebar' + (i + 1) //id and array position are off by one.
+			const placeId = 'place' + (i + 1) //id and array position are off by one.
 			placesList.push(
 				
 				<div 
@@ -43,7 +43,7 @@ class Sidebar extends Component {
 	addPlaceListeners(placesArray) {
 		let self = this;
 		for (let i =0; i < placesArray.length; i++) {
-			const id = 'sidebar' + i;
+			const id = 'place' + i;
 			document.getElementById(id).addEventListener('mouseover', function() {
 				self.highlightPlace(i)
 			})
@@ -51,8 +51,9 @@ class Sidebar extends Component {
 	}
 
 	removePlaceListeners(placesArray) {
+		let self = this;
 		for (let i =0; i < placesArray.length; i++) {
-			const id = 'sidebar' + i;
+			const id = 'place' + i;
 			document.getElementById(id).removeEventListener('mouseover', function() {
 				self.highlightPlace(i)
 			})

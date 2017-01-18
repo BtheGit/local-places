@@ -60,6 +60,13 @@ export function addMarkerIcon(key, icon) {
   }
 }
 
+export function viewPlacescreen(placeID) {
+  return {
+    type: 'VIEW_PLACESCREEN',
+    payload: placeID
+  }
+}
+
 export function focusInfoWindow(marker) {
   return {
     type: 'FOCUS_INFOWINDOW',

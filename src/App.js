@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Sidebar from './components/Sidebar';
-import Map from './components/Map';
+import Mapscreen from './components/Map';
+import Placescreen from './components/Placescreen';
 import { connect } from 'react-redux';
 import {
 	asyncPopulatePlacesFromDB, 
@@ -79,14 +80,14 @@ class App extends Component {
 
 	highlightSelectedPlace = placeId => {
 		//Used to manually select a place from sidebar when clicking on a map marker
-		const selectedElems = document.getElementsByClassName('places-place-selected');
+		const selectedElems = document.getElementsByClassName('sidebar-place-selected');
 		if(selectedElems.length > 0){
 			for (let i =0; i < selectedElems.length; i++) {
-				selectedElems[i].classList.remove('places-place-selected');
+				selectedElems[i].classList.remove('sidebar-place-selected');
 			}
 		}
 		const placeElem = document.getElementById('place' + placeId);
-		placeElem.classList.add('places-place-selected');
+		placeElem.classList.add('sidebar-place-selected');
 
 	}
 
@@ -120,7 +121,7 @@ class App extends Component {
 	        });
 
 	        marker.addListener('mouseover', () => {
-	        	document.getElementById('place' + marker.id).classList.add('places-place-manualHover'); //hover PlacesList elem
+	        	document.getElementById('place' + marker.id).classList.add('sidebar-place-manualHover'); //hover PlacesList elem
 	        	marker.setIcon(this.props.maps.markerIcons.highlighted);
 	        	this.props.dispatch(asyncHighlightPlace(marker.id));
 	        });
@@ -128,7 +129,7 @@ class App extends Component {
 	        marker.addListener('mouseout', () => {
 	        	//to avoid overwriting the highlighted bouncing effect too soon
 	        	if(marker.animation === null){
-	        		document.getElementById('place' + marker.id).classList.remove('places-place-manualHover'); 
+	        		document.getElementById('place' + marker.id).classList.remove('sidebar-place-manualHover'); 
 	 	        	marker.setIcon(this.props.maps.markerIcons.default);
 	 	        	this.props.dispatch(asyncUnhighlightPlace());       		
 	        	}
@@ -186,12 +187,19 @@ class App extends Component {
       	return newMarker
       } 	
 
+    renderPlacescreen(){
+    	return (
+    		<Placescreen />
+    	)
+    }
+
 	render(){
 		if (this.props.maps.placesArray.length > 0 ) {
 			return (
 				<div id="app-wrapper">
 					<div id="map-component">
-						<Map 
+					{this.props.maps.placescreenActive ? this.renderPlacescreen() : false}
+						<Mapscreen 
 							markers={this.props.maps.markersArray}
 						/>		
 					</div>
