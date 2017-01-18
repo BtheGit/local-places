@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {asyncPopulatePlacesList} from '../actions/actions';
+import {asyncPopulatePlacesList, viewPlacescreen} from '../actions/actions';
 import {connect} from 'react-redux';
-import Collapsible from '../modules/Collapsible'; 
+import Collapsible from '../modules/Collapsible';
 
 class Sidebar extends Component {
 	constructor(props){
@@ -15,24 +15,25 @@ class Sidebar extends Component {
 
 			const placeId = 'place' + (i + 1) //id and array position are off by one.
 			placesList.push(
-				
-				<div 
-					key={i} 
-					className='sidebar-place' 
-					id={placeId} 
+
+				<div
+					key={i}
+					className='sidebar-place'
+					id={placeId}
 					onClick={()=> this.props.selectMenuItem(placesArray[i])}
 					onMouseOver={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.highlighted)}
 					onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.default)}
 				>
-					<Collapsible 
+					<Collapsible
 						trigger={placesArray[i].title}
 						transitionTime={150}
 						classParentString={'collapsible-container'}
 					>
-						{placesArray[i].summary}
+						<p>{placesArray[i].summary}</p>
+						<a className="btn btn-primary" onClick={(e) => this.props.dispatch(viewPlacescreen(placeId))}>Detail</a>
 					</Collapsible>
 				</div>
-				
+
 			)
 		}
 		return placesList;
@@ -62,7 +63,7 @@ class Sidebar extends Component {
 	}
 
 	highlightPlace(key) {
-	} 
+	}
 
 
 	//############## Lifecycle Functions ##########################
@@ -88,10 +89,10 @@ class Sidebar extends Component {
 		return (
 			<div  id="sidebar-container">
 				<div id="sidebar-list-container">
-					{this.props.maps.placesList}					
+					{this.props.maps.placesList}
 				</div>
 			</div>
-			
+
 		)
 	}
 }

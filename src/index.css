@@ -42,6 +42,28 @@ html, body {
 	display: block;
 }
 
+.btn {
+	padding: 5px 10px;
+	display: inline-block;
+	font-size: 13px;
+	line-height: 13px;
+	cursor: pointer;
+}
+
+.btn-primary {
+	background: #ededed;
+	border: 1px solid #d9d9d9;
+}
+
+.placescreen {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	float: left;
+	background: #fff;
+	z-index: 2;
+}
+
 .sidebar-place {
 	width: 100%;
 	text-align: center;
@@ -54,7 +76,6 @@ html, body {
 	cursor: pointer;
 	display: block;
 	text-color: blue;
-	width: 100%;
 	height: 100%;
 	padding: 5px 15px;
 }
@@ -75,7 +96,6 @@ html, body {
 .sidebar-place:hover {
 	background-color: #e8d6c4;
 }
-
 
 .sidebar-place-manualHover {
 	background-color: #e8d6c4 !important;
