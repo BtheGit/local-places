@@ -1,7 +1,9 @@
-export function reset() {
+import placesFromDB from '../api/places.js'
+
+export function updatePlaces() {
   return {
-    type: 'RESET',
-    payload: ''
+    type: 'UPDATE_PLACES',
+    payload: placesFromDB
   }
 }
 
@@ -68,6 +70,12 @@ export function focusInfoWindow(marker) {
 export function clearInfoWindow(){
   return {
     type: 'CLEAR_INFOWINDOW'
+  }
+}
+
+export function asyncPopulatePlacesFromDB() {
+  return function (dispatch) {
+    dispatch(updatePlaces());
   }
 }
 

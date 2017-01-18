@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {asyncPopulatePlacesList} from '../actions/actions';
 import {connect} from 'react-redux';
+import Collapsible from '../modules/Collapsible'; 
 
-class Places extends Component {
+class Sidebar extends Component {
 	constructor(props){
 		super(props)
 
@@ -12,18 +13,26 @@ class Places extends Component {
 		const placesList = [];
 		for (let i = 0; i < placesArray.length; i++) {
 
-			const placeId = 'place' + (i + 1) //id and arrayposition are off by one.
+			const placeId = 'sidebar' + (i + 1) //id and array position are off by one.
 			placesList.push(
-				<li 
+				
+				<div 
 					key={i} 
-					className='places-place' 
+					className='sidebar-place' 
 					id={placeId} 
 					onClick={()=> this.props.selectMenuItem(placesArray[i])}
 					onMouseOver={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.highlighted)}
 					onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.default)}
 				>
-					{placesArray[i].title}
-				</li>
+					<Collapsible 
+						trigger={placesArray[i].title}
+						transitionTime={150}
+						classParentString={'collapsible-container'}
+					>
+						{placesArray[i].summary}
+					</Collapsible>
+				</div>
+				
 			)
 		}
 		return placesList;
@@ -34,7 +43,7 @@ class Places extends Component {
 	addPlaceListeners(placesArray) {
 		let self = this;
 		for (let i =0; i < placesArray.length; i++) {
-			const id = 'place' + i;
+			const id = 'sidebar' + i;
 			document.getElementById(id).addEventListener('mouseover', function() {
 				self.highlightPlace(i)
 			})
@@ -43,7 +52,7 @@ class Places extends Component {
 
 	removePlaceListeners(placesArray) {
 		for (let i =0; i < placesArray.length; i++) {
-			const id = 'place' + i;
+			const id = 'sidebar' + i;
 			document.getElementById(id).removeEventListener('mouseover', function() {
 				self.highlightPlace(i)
 			})
@@ -54,9 +63,11 @@ class Places extends Component {
 	highlightPlace(key) {
 	} 
 
-	//############### END eventlisteners functions #################
+
+	//############## Lifecycle Functions ##########################
 
 	componentDidMount() {
+
 		let placesBuild = new Promise( (resolve, reject) => {
 					resolve(this.props.dispatch(asyncPopulatePlacesList(this.showPlaces(this.props.maps.placesArray))))
 			})
@@ -74,8 +85,10 @@ class Places extends Component {
 
 	render() {
 		return (
-			<div>
-				<div style={{textAlign: 'center'}}><ul>{this.props.maps.placesList}</ul></div>
+			<div  id="sidebar-container">
+				<div id="sidebar-list-container">
+					{this.props.maps.placesList}					
+				</div>
 			</div>
 			
 		)
@@ -88,4 +101,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Places);
+export default connect(mapStateToProps)(Sidebar);

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Places from './components/Places';
+import Sidebar from './components/Sidebar';
 import Map from './components/Map';
 import { connect } from 'react-redux';
-import { 
+import {
+	asyncPopulatePlacesFromDB, 
 	selectMarker, 
 	focusInfoWindow,
 	populateMarkers, 
@@ -21,22 +22,33 @@ import {
 class App extends Component {
 	constructor(props) {
 		super(props)
-		this.state ={
-		}
 		this.selectMenuItem = this.selectMenuItem.bind(this);
 	}
 
 	componentDidMount() {
-		//build generic infowindow
-		this.largeInfowindow = new google.maps.InfoWindow();
-		this.props.dispatch(loadInfoWindow(new google.maps.InfoWindow())) //unused 
-        //build action/reducer for pushing markerIcons to store object
-       	this.props.dispatch(asyncAddMarkerIcon('default', this.makeMarkerIcon('55BB00')));
-       	this.props.dispatch(asyncAddMarkerIcon('highlighted', this.makeMarkerIcon('FFFF24')));
+		const initializeStore = new Promise((resolve, reject) => {
+			resolve(this.props.dispatch(asyncPopulatePlacesFromDB()))
+		})
+			.then(() => {
+				//build generic infowindow which will be reused at each instance to prevent multiple instances
+				this.largeInfowindow = new google.maps.InfoWindow();
+				this.props.dispatch(loadInfoWindow(new google.maps.InfoWindow())) //unused 
+			})
+			.then(() => {
+				//create the default icon types to be used for markers
+				//TODO add dynamic sizing on hover
+				//TODO add more types that correlate to different categories of places
+		       	this.props.dispatch(asyncAddMarkerIcon('default', this.makeMarkerIcon('55BB00')));
+		       	this.props.dispatch(asyncAddMarkerIcon('highlighted', this.makeMarkerIcon('FFFF24')));				
+			})
+			.then(() => {
+        		//build markers and associate them with custom infowindows and color schemes, populate an array of them
+        		//later calls to the database will take the place of static placesArray (prior to the that, need to use static API JSON file)
+				this.buildMarkers(this.props.maps.placesArray)
+			})
 
-        //build markers and associate them with custom infowindows and color schemes, populate an array of them
-        //later calls to the database will take the place of static placesArray (prior to the that, need to use static API JSON file)
-        this.buildMarkers(this.props.maps.placesArray)				
+
+
 	}
 
 
@@ -66,6 +78,7 @@ class App extends Component {
 	}
 
 	highlightSelectedPlace = placeId => {
+		//Used to manually select a place from sidebar when clicking on a map marker
 		const selectedElems = document.getElementsByClassName('places-place-selected');
 		if(selectedElems.length > 0){
 			for (let i =0; i < selectedElems.length; i++) {
@@ -85,13 +98,13 @@ class App extends Component {
 		const markersArray = [];
 		for (let i = 0; i < places.length; i++) {
 
+			//marker is created without map reference which is added in Map component after new google map is created
 	        const marker = new google.maps.Marker({
 				position: places[i].position,
 				title: places[i].title,
 				address: places[i].address || '',
 				rating: places[i].rating || 'none',
-				description: places[i].description || '',
-				// map: this.map,
+				description: places[i].summary || '',
 				icon: this.props.maps.markerIcons.default || this.makeMarkerIcon('55BB00'), //this tends to start too early, need to patch async
 				animation: google.maps.Animation.DROP,
 				id: places[i].id
@@ -101,7 +114,6 @@ class App extends Component {
 	        marker.addListener('click', function() {
 	          self.populateInfoWindow(marker, self.largeInfowindow);
 	          self.highlightSelectedPlace(marker.id)
-	          // self.populateInfoWindow(marker, this.props.maps.infoWindow);
 
 	          	// document.getElementById('place' + marker.id).classList.toggle('places-place-selected'); 
 	          	// needs to be implemented correctly
@@ -129,7 +141,6 @@ class App extends Component {
 	}
 
     populateInfoWindow(marker, infowindow) {
-    	console.log(marker);
     	if (infowindow.marker != marker) {
     		infowindow.setContent('');
     		infowindow.marker = marker;
@@ -151,7 +162,6 @@ class App extends Component {
     						'</div>';
     	infowindow.setContent(newContent);
         infowindow.open(map, marker);
-        console.log(infowindow);
 
     	}
     }
@@ -177,21 +187,28 @@ class App extends Component {
       } 	
 
 	render(){
+		if (this.props.maps.placesArray.length > 0 ) {
+			return (
+				<div id="app-wrapper">
+					<div id="map-component">
+						<Map 
+							markers={this.props.maps.markersArray}
+						/>		
+					</div>
+					<div id="sidebar-component">
+						<Sidebar
+							selectMenuItem={this.selectMenuItem}
+						/>
+					</div>
+				</div>
+			)			
+		}
+		else {
+			return (
+				<div>'loading'</div>
+			)
+		}
 
-		return (
-			<div>
-				<div style={{width: window.innerWidth * .5, height: window.innerHeight * .98, float: 'left'}}>
-					<Map 
-						markers={this.props.maps.markersArray}
-					/>		
-				</div>
-				<div style={{width: window.innerWidth * .45, height: '100%', float: 'right', top: 0, right: 0}}>
-					<Places
-						selectMenuItem={this.selectMenuItem}
-					/>
-				</div>
-			</div>
-		)
 	}
 }
 
