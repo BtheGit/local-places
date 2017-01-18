@@ -43,8 +43,7 @@ class Map extends Component {
           styles: this.props.maps.styles
         });
 
-this.connectMarkers(this.props.markers, map)
-        // setTimeout(() => {this.connectMarkers(this.props.markers, map)}, 100) //SHITTY - figure out a less hacky way!!
+        setTimeout(() => {this.connectMarkers(this.props.markers, map)}, 100) //SHITTY - figure out a less hacky way!!
 
 	}
 
