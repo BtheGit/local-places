@@ -86,6 +86,13 @@ export function clearInfoWindow(){
   }
 }
 
+export function changeMapStyle(style) {
+  return {
+    type: 'CHANGE_MAP_STYLE',
+    payload: style
+  }
+}
+
 export function asyncPopulatePlacesFromDB() {
   return function (dispatch) {
     dispatch(updatePlaces());

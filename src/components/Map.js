@@ -40,7 +40,7 @@ class Map extends Component {
           center: this.props.maps.startLocation,
           zoom: this.props.maps.zoomLevel,
           mapTypeControl: false,
-          styles: this.props.maps.styles
+          styles: this.props.maps.styles[this.props.maps.currentMapStyle]
         });
 
         setTimeout(() => {this.connectMarkers(this.props.markers, map)}, 100) //SHITTY - figure out a less hacky way!!

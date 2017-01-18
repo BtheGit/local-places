@@ -9,10 +9,12 @@ class Place extends Component {
 	renderPlace(place) {
 		return(
 			<div>
-				<h1>{place.title}</h1>
-				<p>Rating: {place.rating}</p>
+				<h1>{place.title || ''}</h1>
+				<a href={place.website} target="_blank">{place.website}</a>
+				<p>{place.address || ''}</p>
 				<br/>
-				<h3>{place.summary}</h3>
+				<h3>{place.summary || ''}</h3>
+				<p>Rating: {place.rating || 'N/A'}</p>
 				<br/>
 				<span>{place.description || ''}</span>
 			</div>
@@ -23,8 +25,8 @@ class Place extends Component {
 	render() {
 		return (
 			<div className="placescreen">
+				<a id="placescreen-btn-close" onClick={(e) => this.props.dispatch(hidePlacescreen())}>✕</a>
 				{this.renderPlace(this.props.place[0])}
-				<a className="btn btn-primary" onClick={(e) => this.props.dispatch(hidePlacescreen())}>Close</a>
 			</div>
 		)
 	}

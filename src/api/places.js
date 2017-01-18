@@ -5,12 +5,14 @@ const places =  [
     title: 'TianHu Vietnamese Restaurant', 
     summary: 'The best moderately priced Vietnamese food in town!', 
     address: 'No. 43-45, Minzu 2nd Rd, Xinxing District, Kaohsiung City, 800',
+    website: 'http://kw.shop2000.com.tw/',
     rating: 4,
     description: `With a menu of 150 items, all meticulously detailed with pictures and English names, 
                   this restaurant is great for non-Chinese speakers. This is the second location for this
                   local chain (the other is in the XingZhong/WenHung Night Market near SanDuo). The restaurant is
                   open for lunch and dinner, Tuesday-Sunday. \n
-                  Recommended dishes: Explosion Pork, Crispy Rice Crust with Pork, Chicken Skewers`
+                  Recommended dishes: Explosion Pork, Crispy Rice Crust with Pork, Chicken Skewers`,
+
   },
   {
     id: 2, 
