@@ -1,22 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
 
-html, body, {
+html, body {
 	width: 100%;
 	height: 100%;
+	font-family: 'PT Sans', sans-serif;
 }
 
+* {
+	padding: 0;
+	margin: 0;
+}
 
 /* APP COMPONENT */
 
 #map-component {
 	position: absolute;
 	width: 65%;
-	height: 98%;
+	height: 100%;
 	float: left;
 }
 
 #sidebar-component {
-	width: 35%; 
-	height: 100%; 
+	width: 35%;
+	height: 100%;
 	float: right;
 	top: 0;
 	right: 0;
@@ -41,31 +47,41 @@ html, body, {
 	text-align: center;
 	list-style: none;
 	display: block;
+	border-bottom: 1px solid #f6f2ed;
 }
 
 .collapsible-container__trigger {
+	cursor: pointer;
 	display: block;
 	text-color: blue;
 	width: 100%;
 	height: 100%;
+	padding: 5px 15px;
+}
+
+.collapsible-container__contentInner {
+	background: #fff;
+	padding: 5px 15px;
+	color: gray;
 }
 
 /*Now hovering markers cant override this attribute. Gotta figure out the problem. */
 
 
 .sidebar-place:nth-child(even) {
-	background-color: gray;
-} 
+	background-color: #fbfaf8;
+}
 
 .sidebar-place:hover {
-	background-color: yellow;
+	background-color: #e8d6c4;
 }
 
 
 .sidebar-place-manualHover {
-	background-color: yellow !important;
+	background-color: #e8d6c4 !important;
 }
 
 .sidebar-place-selected {
-	background-color: orange;
+	background-color: #da9a55 !important;
+	color: #fff;
 }

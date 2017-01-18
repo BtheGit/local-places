@@ -5,16 +5,16 @@ import Mapscreen from './components/Map';
 import Placescreen from './components/Placescreen';
 import { connect } from 'react-redux';
 import {
-	asyncPopulatePlacesFromDB, 
-	selectMarker, 
+	asyncPopulatePlacesFromDB,
+	selectMarker,
 	focusInfoWindow,
-	populateMarkers, 
-	highlightPlace, 
-	unhighlightPlace, 
-	asyncHighlightPlace, 
-	asyncUnhighlightPlace, 
-	asyncAddMarkerIcon, 
-	loadInfoWindow  
+	populateMarkers,
+	highlightPlace,
+	unhighlightPlace,
+	asyncHighlightPlace,
+	asyncUnhighlightPlace,
+	asyncAddMarkerIcon,
+	loadInfoWindow
 } from './actions/actions'
 
 
@@ -33,14 +33,14 @@ class App extends Component {
 			.then(() => {
 				//build generic infowindow which will be reused at each instance to prevent multiple instances
 				this.largeInfowindow = new google.maps.InfoWindow();
-				this.props.dispatch(loadInfoWindow(new google.maps.InfoWindow())) //unused 
+				this.props.dispatch(loadInfoWindow(new google.maps.InfoWindow())) //unused
 			})
 			.then(() => {
 				//create the default icon types to be used for markers
 				//TODO add dynamic sizing on hover
 				//TODO add more types that correlate to different categories of places
 		       	this.props.dispatch(asyncAddMarkerIcon('default', this.makeMarkerIcon('55BB00')));
-		       	this.props.dispatch(asyncAddMarkerIcon('highlighted', this.makeMarkerIcon('FFFF24')));				
+		       	this.props.dispatch(asyncAddMarkerIcon('highlighted', this.makeMarkerIcon('FFFF24')));
 			})
 			.then(() => {
         		//build markers and associate them with custom infowindows and color schemes, populate an array of them
@@ -70,7 +70,7 @@ class App extends Component {
 		//place is an object representing a PLACE database entry
 
 		//logic for selecting one listItem at a time by adding CSS class. get all previous items with class instance
-		//and clear them out and then add new one. Is there a smarter way to do this? This will need to be replaced when 
+		//and clear them out and then add new one. Is there a smarter way to do this? This will need to be replaced when
 		//clicking the item causes an expansion rather than just a visual change.
 
 		this.highlightSelectedPlace(place.id);
@@ -81,9 +81,10 @@ class App extends Component {
 	highlightSelectedPlace = placeId => {
 		//Used to manually select a place from sidebar when clicking on a map marker
 		const selectedElems = document.getElementsByClassName('sidebar-place-selected');
+
 		if(selectedElems.length > 0){
-			for (let i =0; i < selectedElems.length; i++) {
-				selectedElems[i].classList.remove('sidebar-place-selected');
+			for (let i = 0; i < selectedElems.length; i++) {
+				selectedElems[i].classList.remove('sidebar-place-selected', 'sidebar-place-manualHover');
 			}
 		}
 		const placeElem = document.getElementById('place' + placeId);
@@ -111,12 +112,12 @@ class App extends Component {
 				id: places[i].id
 	        });
 
-     
+
 	        marker.addListener('click', function() {
 	          self.populateInfoWindow(marker, self.largeInfowindow);
-	          self.highlightSelectedPlace(marker.id)
+	          self.highlightSelectedPlace(marker.id);
 
-	          	// document.getElementById('place' + marker.id).classList.toggle('places-place-selected'); 
+	          	// document.getElementById('place' + marker.id).classList.toggle('sidebar-place-selected');
 	          	// needs to be implemented correctly
 	        });
 
@@ -129,14 +130,14 @@ class App extends Component {
 	        marker.addListener('mouseout', () => {
 	        	//to avoid overwriting the highlighted bouncing effect too soon
 	        	if(marker.animation === null){
-	        		document.getElementById('place' + marker.id).classList.remove('sidebar-place-manualHover'); 
+	        		document.getElementById('place' + marker.id).classList.remove('sidebar-place-manualHover');
 	 	        	marker.setIcon(this.props.maps.markerIcons.default);
-	 	        	this.props.dispatch(asyncUnhighlightPlace());       		
+	 	        	this.props.dispatch(asyncUnhighlightPlace());
 	        	}
-	        });     
+	        });
 
    	        markersArray.push(marker);
-   	
+
         }
         this.props.dispatch(populateMarkers(markersArray));
 	}
@@ -185,7 +186,7 @@ class App extends Component {
       		new google.maps.Size(21,34)
       		);
       	return newMarker
-      } 	
+      }
 
     renderPlacescreen(){
     	return (
@@ -199,9 +200,9 @@ class App extends Component {
 				<div id="app-wrapper">
 					<div id="map-component">
 					{this.props.maps.placescreenActive ? this.renderPlacescreen() : false}
-						<Mapscreen 
+						<Mapscreen
 							markers={this.props.maps.markersArray}
-						/>		
+						/>
 					</div>
 					<div id="sidebar-component">
 						<Sidebar
@@ -209,7 +210,7 @@ class App extends Component {
 						/>
 					</div>
 				</div>
-			)			
+			)
 		}
 		else {
 			return (
@@ -227,5 +228,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(App);
-
-
