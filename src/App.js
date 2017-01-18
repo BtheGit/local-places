@@ -52,7 +52,7 @@ class App extends Component {
 
 	}
 
-
+	//not currently used
 	selectMapMarker(place) {
 		//locate corresponding marker when place is selected to highlight it
 		const selectedMarker = this.props.maps.markersArray.filter((marker, index) => {
@@ -67,14 +67,9 @@ class App extends Component {
 	}
 
 	selectMenuItem(place) {
-		//place is an object representing a PLACE database entry
-
-		//logic for selecting one listItem at a time by adding CSS class. get all previous items with class instance
-		//and clear them out and then add new one. Is there a smarter way to do this? This will need to be replaced when
-		//clicking the item causes an expansion rather than just a visual change.
-
+		//Function passed to Sidebar to allow it to also select marker on the map
 		this.highlightSelectedPlace(place.id);
-		this.selectMapMarker(place);
+		// this.selectMapMarker(place); not implemented
 
 	}
 
@@ -117,8 +112,6 @@ class App extends Component {
 	          self.populateInfoWindow(marker, self.largeInfowindow);
 	          self.highlightSelectedPlace(marker.id);
 
-	          	// document.getElementById('place' + marker.id).classList.toggle('sidebar-place-selected');
-	          	// needs to be implemented correctly
 	        });
 
 	        marker.addListener('mouseover', () => {
@@ -190,7 +183,10 @@ class App extends Component {
 
     renderPlacescreen(){
     	return (
-    		<Placescreen />
+    		<Placescreen 
+    			placeId={this.props.maps.placescreenID}
+    			dispatch={this.props.dispatch}
+    		/>
     	)
     }
 

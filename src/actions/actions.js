@@ -67,6 +67,12 @@ export function viewPlacescreen(placeID) {
   }
 }
 
+export function hidePlacescreen() {
+  return {
+    type: 'HIDE_PLACESCREEN',
+  }
+}
+
 export function focusInfoWindow(marker) {
   return {
     type: 'FOCUS_INFOWINDOW',

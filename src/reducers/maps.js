@@ -79,6 +79,11 @@ const maps = (state = initialState, action) => {
         placescreenActive: true,
         placescreenID: action.payload
       })
+    case 'HIDE_PLACESCREEN':
+      return({
+        ...state,
+        placescreenActive: false
+      })
     case 'FOCUS_INFOWINDOW':
       return({
         ...state,

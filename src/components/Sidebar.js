@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {asyncPopulatePlacesList, viewPlacescreen} from '../actions/actions';
 import {connect} from 'react-redux';
-import Collapsible from '../modules/Collapsible';
+import Collapsible from './Collapsible';
 
 class Sidebar extends Component {
 	constructor(props){
