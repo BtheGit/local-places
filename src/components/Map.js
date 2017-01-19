@@ -1,13 +1,4 @@
 import React, { Component } from 'react';
-import { 
-	populateMarkers, 
-	highlightPlace, 
-	unhighlightPlace, 
-	asyncHighlightPlace, 
-	asyncUnhighlightPlace, 
-	asyncAddMarkerIcon, 
-	loadInfoWindow 
-} from '../actions/actions'
 import { connect } from 'react-redux';
 
 class Map extends Component {

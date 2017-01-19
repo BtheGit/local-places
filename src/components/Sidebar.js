@@ -25,7 +25,7 @@ class Sidebar extends Component {
 					id={placeId}
 					onClick={()=> this.props.selectMenuItem(placesArray[i])}
 					onMouseOver={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.highlighted)}
-					onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.default)}
+					onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons[placesArray[i].category] || this.props.maps.markerIcons.default)}
 				>
 					<Collapsible
 						trigger={placesArray[i].title}
@@ -42,32 +42,6 @@ class Sidebar extends Component {
 		return placesList;
 	}
 
-	//############### eventlisteners functions #################
-
-	addPlaceListeners(placesArray) {
-		let self = this;
-		for (let i =0; i < placesArray.length; i++) {
-			const id = 'place' + i;
-			document.getElementById(id).addEventListener('mouseover', function() {
-				self.highlightPlace(i)
-			})
-		}
-	}
-
-	removePlaceListeners(placesArray) {
-		let self = this;
-		for (let i =0; i < placesArray.length; i++) {
-			const id = 'place' + i;
-			document.getElementById(id).removeEventListener('mouseover', function() {
-				self.highlightPlace(i)
-			})
-		}
-
-	}
-
-	highlightPlace(key) {
-	}
-
 
 	//############## Lifecycle Functions ##########################
 
@@ -77,15 +51,6 @@ class Sidebar extends Component {
 					resolve(this.props.dispatch(asyncPopulatePlacesList(this.showPlaces(this.props.maps.placesArray))))
 			})
 		//still trying to figure out best way to add eventlisteners after places are populated, promise or thunk or both
-	}
-
-	componentDidReceiveProps() {
-		this.addPlaceListeners(this.props.placesArray)
-
-	}
-
-	componentWillUnmount() {
-		this.removePlaceListeners(this.props.placesArray)
 	}
 
 	render() {

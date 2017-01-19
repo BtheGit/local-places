@@ -116,13 +116,3 @@ export function asyncPopulatePlacesList(placesList) {
     dispatch(populatePlacesList(placesList));
   }
 }
-
-export function asyncAddMarkerIcon(key, icon) {
-  return function (dispatch) {
-    dispatch(addMarkerIcon(key, icon));
-  }
-}
-
-export function asyncSelectMenuItem() {
-  return
-}

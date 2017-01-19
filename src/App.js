@@ -13,7 +13,7 @@ import {
 	unhighlightPlace,
 	asyncHighlightPlace,
 	asyncUnhighlightPlace,
-	asyncAddMarkerIcon,
+	addMarkerIcon,
 	loadInfoWindow
 } from './actions/actions'
 
@@ -39,8 +39,11 @@ class App extends Component {
 				//create the default icon types to be used for markers
 				//TODO add dynamic sizing on hover
 				//TODO add more types that correlate to different categories of places
-		       	this.props.dispatch(asyncAddMarkerIcon('default', this.makeMarkerIcon('55BB00')));
-		       	this.props.dispatch(asyncAddMarkerIcon('highlighted', this.makeMarkerIcon('FFFF24')));
+		       	this.props.dispatch(addMarkerIcon('default', this.makeMarkerIcon('55BB00')));
+		       	this.props.dispatch(addMarkerIcon('highlighted', this.makeMarkerIcon('FFFF24')));
+		       	this.props.dispatch(addMarkerIcon('Dining', this.makeMarkerIcon('8832ff')));
+		       	this.props.dispatch(addMarkerIcon('Recreation', this.makeMarkerIcon('ffa616')));
+		       	this.props.dispatch(addMarkerIcon('Shopping', this.makeMarkerIcon('f21f1f')));
 			})
 			.then(() => {
         		//build markers and associate them with custom infowindows and color schemes, populate an array of them
@@ -102,9 +105,10 @@ class App extends Component {
 				address: places[i].address || '',
 				rating: places[i].rating || 'none',
 				description: places[i].summary || '',
-				icon: this.props.maps.markerIcons.default || this.makeMarkerIcon('55BB00'), //this tends to start too early, need to patch async
+				icon: this.props.maps.markerIcons[places[i].category]|| this.props.maps.markerIcons.default, 
 				animation: google.maps.Animation.DROP,
-				id: places[i].id
+				id: places[i].id,
+				category: places[i].category
 	        });
 
 
@@ -124,7 +128,7 @@ class App extends Component {
 	        	//to avoid overwriting the highlighted bouncing effect too soon
 	        	if(marker.animation === null){
 	        		document.getElementById('place' + marker.id).classList.remove('sidebar-place-manualHover');
-	 	        	marker.setIcon(this.props.maps.markerIcons.default);
+	 	        	marker.setIcon(this.props.maps.markerIcons[marker.category] || this.props.maps.markerIcons.default);
 	 	        	this.props.dispatch(asyncUnhighlightPlace());
 	        	}
 	        });
