@@ -26,7 +26,6 @@ class Place extends Component {
 				<p>Hours: {place.hours || 'N/A'}</p>
 				<br/>
 				<h3>{place.summary || ''}</h3>
-				<p>Rating: {place.rating || 'N/A'}</p>
 				<br/>
 				<h3>Description</h3>
 				<div className="placescreen-desc">{place.description || ''}</div>

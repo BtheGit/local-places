@@ -99,7 +99,7 @@ class App extends Component {
 				address: places[i].address || '',
 				rating: places[i].rating || 'none',
 				description: places[i].summary || '',
-				icon: this.props.maps.markerIcons[places[i].category]|| this.props.maps.markerIcons[places[i].subCategory] ||this.props.maps.markerIcons.Default, 
+				icon:  this.props.maps.markerIcons[places[i].subCategory] ||this.props.maps.markerIcons[places[i].category]|| this.props.maps.markerIcons.Default, 
 				animation: google.maps.Animation.DROP,
 				id: places[i].id,
 				category: places[i].category
@@ -122,7 +122,7 @@ class App extends Component {
 	        	//to avoid overwriting the highlighted bouncing effect too soon
 	        	if(marker.animation === null){
 	        		document.getElementById('place' + marker.id).classList.remove('sidebar-place-manualHover');
-	 	        	marker.setIcon(this.props.maps.markerIcons[marker.category] || this.props.maps.markerIcons[places[i].subCategory] || this.props.maps.markerIcons.Default);
+	 	        	marker.setIcon(this.props.maps.markerIcons[places[i].subCategory] ||this.props.maps.markerIcons[places[i].category]|| this.props.maps.markerIcons.Default);
 	 	        	this.props.dispatch(asyncUnhighlightPlace());
 	        	}
 	        });
@@ -144,14 +144,13 @@ class App extends Component {
     		marker.setIcon(this.props.maps.markerIcons.Highlighted)
     		infowindow.addListener('closeclick', () => {
     			marker.setAnimation(null);
-    			marker.setIcon(this.props.maps.markerIcons[marker.category] || this.props.maps.markerIcons.Default);
+    			marker.setIcon(this.props.maps.markerIcons[marker.subCategory] || this.props.maps.markerIcons[marker.category] || this.props.maps.markerIcons.Default);
     			infowindow.marker = null;
     		});
     	const id = 'place' + marker.id;
     	const newContent = `<div class="iwContainer"> 
     	    	    							 <div class="iwTitle">${marker.title}</div>
     	    	    							 <br/>
-    	    	    							 <div class="iwRating">Rating: ${marker.rating}</div>
     	    	    							 <div class="iwDescription">${marker.description}</div>
     	    	    							 <br/>
     	    	    							 <div class="iwAddress">Address: ${marker.address}</div>

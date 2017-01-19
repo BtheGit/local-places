@@ -17,7 +17,6 @@ const places =  [
     address: 'No. 43-45, Minzu 2nd Rd, Xinxing District, Kaohsiung City, 800',
     website: 'http://kw.shop2000.com.tw/',
     hours: 'Tues-Sun: 11:30-14:30 and 17:00-20:30; Closed Mondays',
-    rating: 4,
     description: `With a menu of 150 items, all meticulously detailed with pictures and English names, 
                   this restaurant is great for non-Chinese speakers. This is the second location for this
                   local chain (the other is in the XingZhong/WenHung Night Market near SanDuo). The restaurant is
@@ -28,12 +27,12 @@ const places =  [
   {
     id: 2, 
     position: {lat: 22.624695, lng: 120.307813},
-    category: 'Food',
-    subCategory: 'Cafe',
+    category: 'Outdoors',
+    subCategory: 'Camping',
     title: "Brendan's House", 
     imagesArray: [],
-    summary: 'The home of this website.', 
-    phone: '0984301727',
+    summary: '', 
+    phone: '',
   },
   {
     id: 3, 
@@ -53,7 +52,6 @@ const places =  [
     address: 'No. 45, Zhongzheng 2nd Rd, Lingya District, Kaohsiung City, 802',
     hours: 'Everyday: 05:30-23:00',
     website: 'http://www.nhspa.com.tw/',
-    rating: 4,
 
   },
   {
@@ -71,7 +69,6 @@ const places =  [
     phone: '07 322 3929',
     address: "No. 1, Boren St, Sanmin District, Kaohsiung City, 807",
     hours: 'Sun, Tues-Thurs: 11:30-22:30; Fri-Sat: 11:30-23:30; Closed Mondays', 
-    rating: 4, 
     description: `One of Kaohsiung's best places to play boardgames. Tobey's has arguably the largest and most diverse 
                   selection of games in town. The cost is 40NT per person per hour to play in the store. Games are also available
                   to borrow at a cost of 10% of the retail price of the game per day. Borrowing requires you to put down 
@@ -94,7 +91,6 @@ const places =  [
     address: '',
     website: '',
     hours: '',
-    rating: '',
     description: ``,
 
   },
@@ -112,7 +108,6 @@ const places =  [
     address: '',
     website: '',
     hours: '',
-    rating: '',
     description: ``,
 
   },
@@ -130,7 +125,6 @@ const places =  [
     address: '',
     website: '',
     hours: '',
-    rating: '',
     description: ``,
 
   },
