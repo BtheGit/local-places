@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {asyncPopulatePlacesList, viewPlacescreen} from '../actions/actions';
 import {connect} from 'react-redux';
 import Collapsible from './Collapsible';
-import icons from '../media/inlineIcons';
+import icons from '../media/inlineIcons'; //could also pass this down from app now instead of importing twice (import if moved server side)
 
 class Sidebar extends Component {
 	constructor(props){
@@ -24,8 +24,9 @@ class Sidebar extends Component {
 
 			//Dirty code to build trigger with SVG icons from map-icons.com
 			//TODO is to color coordinate these with markers. Also to have both pull from the same source ultimately.
+			//TODO separate into component
 			const iconClassName = `sidebar-icon sidebar-icon-${subCategory || category || 'Default' }`
-			const svgIcon = <svg className={iconClassName} key={i} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 50 50" overflow="inherit"><path d={iconPath}/></svg>;
+			const svgIcon = <svg className={iconClassName} style={{fill: iconPath['color']}} key={i} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 50 50" overflow="inherit"><path d={iconPath['path']}/></svg>;
 			const triggerText = [svgIcon, placesArray[i].title ];
 
 			const id = Number(JSON.stringify(JSON.parse(i))) + 1 //NOTE: So callbacks reference the current value of i not the final value
@@ -37,8 +38,8 @@ class Sidebar extends Component {
 					className='sidebar-place'
 					id={placeId}
 					onClick={()=> this.props.selectMenuItem(placesArray[i])}
-					onMouseOver={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.highlighted)}
-					onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons[placesArray[i].category] || this.props.maps.markerIcons.default)}
+					onMouseOver={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.Highlighted)}
+					onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons[placesArray[i].category] || this.props.maps.markerIcons.Default)}
 				>
 					<Collapsible
 						trigger={ triggerText }

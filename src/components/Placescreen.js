@@ -21,16 +21,18 @@ class Place extends Component {
 					{place.imagesArray.length > 0 ? <img src={place.imagesArray[0]} className="placescreen-img" onClick={() => this.setState({ isOpen: true })}/> : null}
 				</div>
 				<a href={place.website} target="_blank">{place.website}</a>
-				<p>{place.address || ''}</p>
+				<p>Phone: {place.phone || 'N/A'}</p>
+				<p>Address: {place.address || 'N/A'}</p>
+				<p>Hours: {place.hours || 'N/A'}</p>
 				<br/>
 				<h3>{place.summary || ''}</h3>
 				<p>Rating: {place.rating || 'N/A'}</p>
 				<br/>
+				<h3>Description</h3>
 				<div className="placescreen-desc">{place.description || ''}</div>
 			</div>
 		)
 	}
-
 
 	render() {
 

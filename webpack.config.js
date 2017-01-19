@@ -28,6 +28,7 @@ module.exports = {
       		},
       		{
 				test: /\.(jpg|png|svg)$/,
+				exclude: /icons/,
 				loader: 'file?name=media/[name].[ext]'
 		    }
 

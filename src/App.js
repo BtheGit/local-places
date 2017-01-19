@@ -16,7 +16,8 @@ import {
 	addMarkerIcon,
 	loadInfoWindow,
 	viewPlacescreen
-} from './actions/actions'
+} from './actions/actions';
+import icons from './media/inlineIcons';
 
 
 
@@ -37,14 +38,7 @@ class App extends Component {
 			})
 			.then(() => {
 				//create the default icon types to be used for markers
-				//TODO add dynamic sizing on hover
-				//TODO add more types that correlate to different categories of places
-				//TODO decide best to keep this markers and the sidebar icons connected and generating at the same time
-		       	this.props.dispatch(addMarkerIcon('default', this.makeMarkerIcon('55BB00')));
-		       	this.props.dispatch(addMarkerIcon('highlighted', this.makeMarkerIcon('FFFF24')));
-		       	this.props.dispatch(addMarkerIcon('Food', this.makeMarkerIcon('8832ff')));
-		       	this.props.dispatch(addMarkerIcon('Recreation', this.makeMarkerIcon('ffa616')));
-		       	this.props.dispatch(addMarkerIcon('Shopping', this.makeMarkerIcon('f21f1f')));
+				this.generateMarkerIcons(icons);
 			})
 			.then(() => {
         		//build markers and associate them with custom infowindows and color schemes, populate an array of them
@@ -105,7 +99,7 @@ class App extends Component {
 				address: places[i].address || '',
 				rating: places[i].rating || 'none',
 				description: places[i].summary || '',
-				icon: this.props.maps.markerIcons[places[i].category]|| this.props.maps.markerIcons.default, 
+				icon: this.props.maps.markerIcons[places[i].category]|| this.props.maps.markerIcons.Default, 
 				animation: google.maps.Animation.DROP,
 				id: places[i].id,
 				category: places[i].category
@@ -120,7 +114,7 @@ class App extends Component {
 
 	        marker.addListener('mouseover', () => {
 	        	document.getElementById('place' + marker.id).classList.add('sidebar-place-manualHover'); //hover PlacesList elem
-	        	marker.setIcon(this.props.maps.markerIcons.highlighted);
+	        	marker.setIcon(this.props.maps.markerIcons.Highlighted);
 	        	this.props.dispatch(asyncHighlightPlace(marker.id));
 	        });
 
@@ -128,7 +122,7 @@ class App extends Component {
 	        	//to avoid overwriting the highlighted bouncing effect too soon
 	        	if(marker.animation === null){
 	        		document.getElementById('place' + marker.id).classList.remove('sidebar-place-manualHover');
-	 	        	marker.setIcon(this.props.maps.markerIcons[marker.category] || this.props.maps.markerIcons.default);
+	 	        	marker.setIcon(this.props.maps.markerIcons[marker.category] || this.props.maps.markerIcons.Default);
 	 	        	this.props.dispatch(asyncUnhighlightPlace());
 	        	}
 	        });
@@ -147,10 +141,10 @@ class App extends Component {
     		infowindow.setContent('');
     		infowindow.marker = marker;
     		this.toggleBounce(marker);
-    		marker.setIcon(this.props.maps.markerIcons.highlighted)
+    		marker.setIcon(this.props.maps.markerIcons.Highlighted)
     		infowindow.addListener('closeclick', () => {
     			marker.setAnimation(null);
-    			marker.setIcon(this.props.maps.markerIcons[marker.category] || this.props.maps.markerIcons.default);
+    			marker.setIcon(this.props.maps.markerIcons[marker.category] || this.props.maps.markerIcons.Default);
     			infowindow.marker = null;
     		});
     	const id = 'place' + marker.id;
@@ -176,6 +170,12 @@ class App extends Component {
 	  } else {
 	    marker.setAnimation(google.maps.Animation.BOUNCE);
 	  }
+	}
+
+	generateMarkerIcons(iconsObject){
+		for (let icon in iconsObject) {
+			this.props.dispatch(addMarkerIcon(icon, this.makeMarkerIcon(iconsObject[icon].color)));
+		}
 	}
 
 	makeMarkerIcon(markerColor) {
@@ -226,7 +226,7 @@ class App extends Component {
 		}
 		else {
 			return (
-				<div>'loading'</div>
+				<div>'error: could not load from database'</div>
 			)
 		}
 
