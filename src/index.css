@@ -63,6 +63,10 @@ html, body {
 	border-bottom: 1px solid #f6f2ed;
 }
 
+.sidebar-icon {
+	
+}
+
 .collapsible-container__trigger {
 	cursor: pointer;
 	display: block;

@@ -12,10 +12,10 @@ var Collapsible = React.createClass({
     classParentString: React.PropTypes.string,
     accordionPosition: React.PropTypes.number,
     handleTriggerClick: React.PropTypes.func,
-    trigger: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.element
-    ]),
+    // trigger: React.PropTypes.oneOfType([ //I overrode this rule to allow for inlining the SVG. If it breaks, this is probably why! :)
+    //   React.PropTypes.string,
+    //   React.PropTypes.element
+    // ]),
     triggerWhenOpen:React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.element

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {asyncPopulatePlacesList, viewPlacescreen} from '../actions/actions';
 import {connect} from 'react-redux';
 import Collapsible from './Collapsible';
+import icons from '../media/inlineIcons';
 
 class Sidebar extends Component {
 	constructor(props){
@@ -13,10 +14,21 @@ class Sidebar extends Component {
 
 
 	showPlaces(placesArray) {
+
 		const placesList = [];
 		for (let i = 0; i < placesArray.length; i++) {
-			const id = Number(JSON.stringify(JSON.parse(i))) + 1
-			const placeId = 'place' + id //id and array position are off by one.
+
+			const category = placesArray[i].category,
+				subCategory = placesArray[i].subCategory;
+			const iconPath = icons[subCategory] || icons[category] || icons["Default"];
+
+			//Dirty code to build trigger with SVG icons from map-icons.com
+			const iconClassName = `sidebar-icon sidebar-icon-${subCategory || category || 'Default' }`
+			const svgIcon = <svg className={iconClassName} key={i} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 50 50" overflow="inherit"><path d={iconPath}/></svg>;
+			const triggerText = [svgIcon, placesArray[i].title ];
+
+			const id = Number(JSON.stringify(JSON.parse(i))) + 1 //NOTE: So callbacks reference the current value of i not the final value
+			const placeId = 'place' + id //NOTE: id and array position are off by one.
 			placesList.push(
 
 				<div
@@ -28,7 +40,7 @@ class Sidebar extends Component {
 					onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons[placesArray[i].category] || this.props.maps.markerIcons.default)}
 				>
 					<Collapsible
-						trigger={placesArray[i].title}
+						trigger={ triggerText }
 						transitionTime={150}
 						classParentString={'collapsible-container'}
 					>

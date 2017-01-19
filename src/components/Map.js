@@ -9,7 +9,6 @@ class Map extends Component {
 
 
  	connectMarkers(markersArray, map) {
- 		console.log('connectMarkers:', markersArray, map)
  		return markersArray.map(function(marker) {
  			return marker.setMap(map)
  		})

@@ -39,9 +39,10 @@ class App extends Component {
 				//create the default icon types to be used for markers
 				//TODO add dynamic sizing on hover
 				//TODO add more types that correlate to different categories of places
+				//TODO decide best to keep this markers and the sidebar icons connected and generating at the same time
 		       	this.props.dispatch(addMarkerIcon('default', this.makeMarkerIcon('55BB00')));
 		       	this.props.dispatch(addMarkerIcon('highlighted', this.makeMarkerIcon('FFFF24')));
-		       	this.props.dispatch(addMarkerIcon('Dining', this.makeMarkerIcon('8832ff')));
+		       	this.props.dispatch(addMarkerIcon('Food', this.makeMarkerIcon('8832ff')));
 		       	this.props.dispatch(addMarkerIcon('Recreation', this.makeMarkerIcon('ffa616')));
 		       	this.props.dispatch(addMarkerIcon('Shopping', this.makeMarkerIcon('f21f1f')));
 			})
@@ -64,7 +65,6 @@ class App extends Component {
 			}
 		});
 		//selectedMarker filter returns an array, we only want the first result
-		// console.log(selectedMarker[0])
 		this.props.dispatch(selectMarker(selectedMarker[0].id));
 		this.props.dispatch(focusInfoWindow(selectedMarker[0]));
 	}
