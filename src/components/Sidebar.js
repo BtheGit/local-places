@@ -39,7 +39,7 @@ class Sidebar extends Component {
 					id={placeId}
 					onClick={()=> this.props.selectMenuItem(placesArray[i])}
 					onMouseOver={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.Highlighted)}
-					onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons[placesArray[i].category] || this.props.maps.markerIcons.Default)}
+					onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons[placesArray[i].category] || this.props.maps.markerIcons[placesArray[i].subCategory] ||this.props.maps.markerIcons.Default)}
 				>
 					<Collapsible
 						trigger={ triggerText }

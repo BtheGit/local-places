@@ -3,7 +3,7 @@ const places =  [
     id: 1, 
     position: {lat: 22.6301162, lng: 120.31294260000004},
     category: 'Food',
-    subCategory: 'Dining',
+    subCategory: 'Restaurant',
     tags: ['vietnamese', 'restaurant', 'affordable'],
     title: 'TianHu Vietnamese Restaurant', 
     imagesArray: [
@@ -83,10 +83,46 @@ const places =  [
   { 
     id: 5, 
     position: {lat: 22.623625, lng: 120.305115},
-    category: '',
-    subCategory: '',
+    category: 'Food',
+    subCategory: 'Restaurant',
     tags: [],
-    title: '', 
+    title: 'LiuJiang Lunch Box 劉江便當', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    rating: '',
+    description: ``,
+
+  },
+  { 
+    id: 6, 
+    position: {lat: 22.6165778, lng: 120.30325859999994},
+    category: 'Recreation',
+    subCategory: 'Bowling Alley',
+    tags: [],
+    title: 'Shoushan Bowling Alley 壽山保齡球館', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    rating: '',
+    description: ``,
+
+  },
+  { 
+    id: 7, 
+    position: {lat: 22.631849, lng: 120.260849},
+    category: 'Nature',
+    subCategory: 'Beach',
+    tags: [],
+    title: 'Secret Beach (shhhhhh...)', 
     imagesArray: [
     ],
     summary: '', 
