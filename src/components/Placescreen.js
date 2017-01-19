@@ -10,13 +10,16 @@ class Place extends Component {
 		return(
 			<div>
 				<h1>{place.title || ''}</h1>
+				<div>
+					{place.imagesArray.length > 0 ? <img src={place.imagesArray[0]} className="placescreen-img"/> : null}
+				</div>
 				<a href={place.website} target="_blank">{place.website}</a>
 				<p>{place.address || ''}</p>
 				<br/>
 				<h3>{place.summary || ''}</h3>
 				<p>Rating: {place.rating || 'N/A'}</p>
 				<br/>
-				<span>{place.description || ''}</span>
+				<div className="placescreen-desc">{place.description || ''}</div>
 			</div>
 		)
 	}

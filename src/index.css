@@ -64,7 +64,7 @@ html, body {
 }
 
 .sidebar-icon {
-	
+
 }
 
 .collapsible-container__trigger {
@@ -115,4 +115,12 @@ html, body {
 	cursor: pointer;
 }
 
+.placescreen-img {
+	height: 30%;
+	width: 30%;
+	overflow: hidden;
+}
 
+.placescreen-desc {
+	white-space: pre-line;
+}

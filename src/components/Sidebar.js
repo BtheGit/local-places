@@ -23,6 +23,7 @@ class Sidebar extends Component {
 			const iconPath = icons[subCategory] || icons[category] || icons["Default"];
 
 			//Dirty code to build trigger with SVG icons from map-icons.com
+			//TODO is to color coordinate these with markers. Also to have both pull from the same source ultimately.
 			const iconClassName = `sidebar-icon sidebar-icon-${subCategory || category || 'Default' }`
 			const svgIcon = <svg className={iconClassName} key={i} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 50 50" overflow="inherit"><path d={iconPath}/></svg>;
 			const triggerText = [svgIcon, placesArray[i].title ];

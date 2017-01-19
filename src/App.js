@@ -14,9 +14,9 @@ import {
 	asyncHighlightPlace,
 	asyncUnhighlightPlace,
 	addMarkerIcon,
-	loadInfoWindow
+	loadInfoWindow,
+	viewPlacescreen
 } from './actions/actions'
-
 
 
 
@@ -139,6 +139,9 @@ class App extends Component {
         this.props.dispatch(populateMarkers(markersArray));
 	}
 
+	//TODO: Detail button inside infowindow not working. Throwing error. Need to fix and then set it to close the infowindow
+	//when the detail view loads (separate clearing infowindow into a separate function and track current infowindow in store)
+
     populateInfoWindow(marker, infowindow) {
     	if (infowindow.marker != marker) {
     		infowindow.setContent('');
@@ -147,18 +150,19 @@ class App extends Component {
     		marker.setIcon(this.props.maps.markerIcons.highlighted)
     		infowindow.addListener('closeclick', () => {
     			marker.setAnimation(null);
-    			marker.setIcon(this.props.maps.markerIcons.default)
+    			marker.setIcon(this.props.maps.markerIcons[marker.category] || this.props.maps.markerIcons.default);
     			infowindow.marker = null;
     		});
-
-    	const newContent = '<div class="iwContainer">' +
-    							 '<div class="iwTitle">' + marker.title + '</div>' +
-    							 '<br>' +
-    							 '<div class="iwRating">Rating: ' + marker.rating + '</div>' +
-    							 '<div class="iwDescription">' + marker.description + '</div>' +
-    							 '<br>' +
-    							 '<div class="iwAddress"Address: >' + marker.address + '</div>' +
-    						'</div>';
+    	const id = 'place' + marker.id;
+    	const newContent = `<div class="iwContainer"> 
+    	    	    							 <div class="iwTitle">${marker.title}</div>
+    	    	    							 <br/>
+    	    	    							 <div class="iwRating">Rating: ${marker.rating}</div>
+    	    	    							 <div class="iwDescription">${marker.description}</div>
+    	    	    							 <br/>
+    	    	    							 <div class="iwAddress">Address: ${marker.address}</div>
+    	    	    							 <a class="btn btn-primary" onClick=${(e) => {this.props.dispatch(viewPlacescreen(id))}}>Detail</a>
+    	    	    						</div>`;
     	infowindow.setContent(newContent);
         infowindow.open(map, marker);
 
