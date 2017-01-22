@@ -128,6 +128,300 @@ const places =  [
     description: ``,
 
   },
+  { 
+    id: 8, 
+    position: {lat: 22.628363, lng: 120.305657},
+    category: 'Food',
+    subCategory: 'Bakery',
+    tags: [],
+    title: "L'atelier de pain", 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 9, 
+    position: {lat: 22.622724, lng: 120.316984},
+    category: 'Food',
+    subCategory: 'Restaurant',
+    tags: [],
+    title: 'Lahore Restaurant', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 10, 
+    position: {lat: 22.623456, lng: 120.318382},
+    category: 'Food',
+    subCategory: 'Bakery',
+    tags: [],
+    title: "S'more Sugar II", 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 11, 
+    position: {lat: 22.664121, lng: 120.309573},
+    category: 'Food',
+    subCategory: 'Bakery',
+    tags: [],
+    title: "S'more Sugar", 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: 'No. 167, Xinhai Rd, Zuoying District, Kaohsiung City, Taiwan 813',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 12, 
+    position: {lat: 22.63149, lng: 120.318671},
+    category: 'Recreation',
+    subCategory: 'Boardgames',
+    tags: [],
+    title: 'Punch Boardgames 龐奇桌遊餐廳', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '07 223 3338',
+    address: 'No. 31, Taishun St, Lingya District, Kaohsiung City, Taiwan 802',
+    website: 'http://punchboardgame.pixnet.net/blog',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 13, 
+    position: {lat: 22.648769 , lng: 120.322938},
+    category: 'Recreation',
+    subCategory: 'Boardgames',
+    tags: [],
+    title: 'Join Board Game Studio 桌癮桌遊休閒空間', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '07 380 8020',
+    address: 'No. 1, Jiande Rd, Sanmin District, Kaohsiung City, Taiwan 807',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+
+  { 
+    id: 14, 
+    position: {lat: 22.666182 , lng: 120.284264},
+    category: 'Food',
+    subCategory: 'Restaurant',
+    tags: [],
+    title: 'Katsicafé 卡茲咖啡', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: 'No. 1823, Jiuru 4th Rd, Gushan District, Kaohsiung City, Taiwan 804',
+    website: 'https://www.facebook.com/katsicafe/',
+    hours: '',
+    description: ``,
+
+  },
+
+  { 
+    id: 15, 
+    position: {lat: 22.647086 , lng: 120.297495},
+    category: 'Food',
+    subCategory: 'Restaurant',
+    tags: [],
+    title: ' Hungry Ghost 餓鬼餐館', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '0982 261 367',
+    address: 'No.233, Hankou St., Sanmin Dist., Kaohsiung City 807',
+    website: 'https://www.facebook.com/hungryghost.taiwan/',
+    hours: '',
+    description: ``,
+
+  },
+
+  { 
+    id: 16, 
+    position: {lat:  22.627463  , lng: 120.296143},
+    category: 'Food',
+    subCategory: 'Restaurant',
+    tags: [],
+    title: 'Enhui Thai Food 恩慧泰式小館', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '0973 373 215',
+    address: 'No. 8, Datong 2nd Rd, Qianjin District, Kaohsiung City, Taiwan 801',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+
+  { 
+    id: 17, 
+    position: {lat: 22.628024 , lng: 120.307803},
+    category: 'Food',
+    subCategory: 'Restaurant',
+    tags: [],
+    title: 'Chunlun Guaboa 春蘭割包', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '07 201 7806',
+    address: 'No. 5, Fuxing 1st Rd, Xinxing District, Kaohsiung City, Taiwan 800',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+
+  { 
+    id: 18, 
+    position: {lat: 22.637513 , lng: 120.276765},
+    category: 'Nature',
+    subCategory: 'Hiking',
+    tags: [],
+    title: 'Monkey Mountain/Shoushan - Zoo Entrance', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: 'No. 352, Wanshou Rd, Gushan District, Kaohsiung City, Taiwan 804',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 19, 
+    position: {lat: 22.651522 , lng: 120.273144},
+    category: 'Nature',
+    subCategory: 'Hiking',
+    tags: [],
+    title: 'Monkey Mountain/Shoushan - Parking Lot Entrance', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: 'No. 98, Qingquan St, Gushan District, Kaohsiung City, Taiwan 804',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 20, 
+    position: {lat: 22.655455  , lng: 120.273176},
+    category: 'Nature',
+    subCategory: 'Hiking',
+    tags: [],
+    title: 'Monkey Mountain/Shoushan - Mountain Climbing Entrance', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '高雄市鼓山區鼓山三路25巷61弄8號',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 21, 
+    position: {lat: 22.643422 , lng: 120.309616},
+    category: 'Recreation',
+    subCategory: 'Boardgames',
+    tags: [],
+    title: 'Fun4桌遊餐廳 (Gaoyi Branch)', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: 'No. 145, Rehe 1st St, Sanmin District, Kaohsiung City, Taiwan 807',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 22, 
+    position: {lat: 22.644353 , lng: 120.315802},
+    category: 'Food',
+    subCategory: 'Food Market',
+    tags: [],
+    title: 'Wholesale Produce Market 高雄市果菜批發市場', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: 'No. 40, Lane 100, Minzu 1st Rd, Sanmin District, Kaohsiung City, Taiwan 807',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 23, 
+    position: {lat: 22.657195 , lng: 120.304644},
+    category: 'Food',
+    subCategory: 'Restaurant',
+    tags: [],
+    title: 'Arkansas Diner', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '07 550 9177',
+    address: '',
+    website: 'http://www.arkansasdiner.com/',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 24, 
+    position: {lat: 22.657195 , lng: 120.315802},
+    category: '',
+    subCategory: '',
+    tags: [],
+    title: '', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
 
 ]
 
