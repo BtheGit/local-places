@@ -107,8 +107,15 @@ class App extends Component {
 
 
 	        marker.addListener('click', function() {
-	          self.populateInfoWindow(marker, self.largeInfowindow);
-	          self.highlightSelectedPlace(marker.id);
+	        	//this is to fix the multiple highlighted and animated markers. But requires looping through all markers.
+	        	//TODO: need to refactor code to start tracking current marker not just its id (which I'm not doing despite the bad variable name)
+	        	for (let i in self.props.maps.markersArray) {
+	        		self.props.maps.markersArray[i].setAnimation(null)
+	        		self.props.maps.markersArray[i].setIcon(self.props.maps.markerIcons[places[i].subCategory] ||self.props.maps.markerIcons[places[i].category]|| self.props.maps.markerIcons.Default);
+	        	}
+
+				self.populateInfoWindow(marker, self.largeInfowindow);
+				self.highlightSelectedPlace(marker.id);
 
 	        });
 
