@@ -32,6 +32,12 @@ html, body {
 	overflow-y: scroll;
 }
 
+/* MAP COMPONENT */
+
+.iwThumbnail {
+	height: 30%;
+	width: 30%;
+}
 
 /* SIDEBAR COMPONENT */
 

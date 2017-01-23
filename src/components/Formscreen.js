@@ -8,6 +8,10 @@ class Formscreen extends Component {
 		}
 	}
 
+	handleSumbit(event) {
+		
+	}
+
 	renderFormElement() {
 
 	}

@@ -96,6 +96,7 @@ class App extends Component {
 	        const marker = new google.maps.Marker({
 				position: places[i].position,
 				title: places[i].title,
+				thumbnail: places[i].imagesArray[0] || '',
 				address: places[i].address || '',
 				rating: places[i].rating || 'none',
 				description: places[i].summary || '',
@@ -154,9 +155,14 @@ class App extends Component {
     			marker.setIcon(this.props.maps.markerIcons[marker.subCategory] || this.props.maps.markerIcons[marker.category] || this.props.maps.markerIcons.Default);
     			infowindow.marker = null;
     		});
+    		
+    	//if there is an image available it will be used as a thumbnail
+    	//adding the ternary this way meant the infowindow didn't rener an empty block where an image should be
+    	const thumbnail = marker.thumbnail ? `<img class="iwThumbnail" src="${marker.thumbnail}" alt="" />` : '' ;
     	const id = 'place' + marker.id;
     	const newContent = `<div class="iwContainer"> 
     	    	    							 <div class="iwTitle">${marker.title}</div>
+    	    	    							 ${thumbnail}
     	    	    							 <br/>
     	    	    							 <div class="iwDescription">${marker.description}</div>
     	    	    							 <br/>
