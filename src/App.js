@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Sidebar from './components/Sidebar';
 import Mapscreen from './components/Map';
 import Placescreen from './components/Placescreen';
+import Formscreen from './components/Formscreen';
 import { connect } from 'react-redux';
 import {
 	asyncPopulatePlacesFromDB,
@@ -155,7 +156,7 @@ class App extends Component {
     			marker.setIcon(this.props.maps.markerIcons[marker.subCategory] || this.props.maps.markerIcons[marker.category] || this.props.maps.markerIcons.Default);
     			infowindow.marker = null;
     		});
-    		
+
     	//if there is an image available it will be used as a thumbnail
     	//adding the ternary this way meant the infowindow didn't rener an empty block where an image should be
     	const thumbnail = marker.thumbnail ? `<img class="iwThumbnail" src="${marker.thumbnail}" alt="" />` : '' ;
@@ -242,7 +243,9 @@ class App extends Component {
 			)
 		}
 
+
 	}
+
 }
 
 function mapStateToProps(state) {
