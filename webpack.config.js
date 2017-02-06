@@ -1,6 +1,9 @@
 var webpack = require("webpack");
 var path = require('path');
-
+var autoprefixer = require('autoprefixer');
+var mixins = require('postcss-mixins');
+var cssnext = require('postcss-cssnext');
+var impy = require('postcss-import');
 
 module.exports = {
    entry: {
@@ -30,10 +33,7 @@ module.exports = {
 
       ]
    },
-	 postcss: [
-		 require('autoprefixer'),
-		 require('postcss-mixins'),
-		 require('postcss-nested'),
-		 require('postcss-simple-vars')
-	 ]
+	 postcss: () => {
+     return {defaults: [ impy, autoprefixer, mixins, cssnext ]}
+   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {asyncPopulatePlacesList, viewPlacescreen} from '../actions/actions';
 import {connect} from 'react-redux';
 import Collapsible from './Collapsible';
+import SearchBox from './SearchBox';
 import icons from '../media/inlineIcons'; //could also pass this down from app now instead of importing twice (import if moved server side)
 
 class Sidebar extends Component {
@@ -26,8 +27,11 @@ class Sidebar extends Component {
 			//TODO is to color coordinate these with markers. Also to have both pull from the same source ultimately.
 			//TODO separate into component
 			const iconClassName = `sidebar-icon sidebar-icon-${subCategory || category || 'Default' }`
-			const svgIcon = <svg className={iconClassName} style={{fill: iconPath['color']}} key={i} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 50 50" overflow="inherit"><path d={iconPath['path']}/></svg>;
-			const triggerText = [svgIcon, placesArray[i].title ];
+			// const svgIcon = <svg className={iconClassName} style={{fill: iconPath['color']}} key={i} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 50 50" overflow="inherit"><path d={iconPath['path']}/></svg>;
+			const svgIcon = (<svg className={iconClassName} style={{fill: iconPath['color']}} key={i} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="-293.5 385 18 21" overflow="inherit">
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M-275.5,394c0-5-4-9-9-9s-9,4-9,9c0,3.6,2.1,6.6,5.1,8.1l3.9,3.9l3.9-3.9C-277.6,400.6-275.5,397.6-275.5,394z"/>
+			</svg>);
+			const triggerText = [ svgIcon, placesArray[i].title ];
 
 			const id = Number(JSON.stringify(JSON.parse(i))) + 1 //NOTE: So callbacks reference the current value of i not the final value
 			const placeId = 'place' + id //NOTE: id and array position are off by one.
@@ -47,7 +51,7 @@ class Sidebar extends Component {
 						classParentString={'collapsible-container'}
 					>
 						<p>{placesArray[i].summary}</p>
-						<a className="btn btn-primary" onClick={(e) => this.props.dispatch(viewPlacescreen(id))}>Detail</a>
+						<a className="btn btn-primary" onClick={(e) => this.props.dispatch(viewPlacescreen(id))}>+ Detail</a>
 					</Collapsible>
 				</div>
 
@@ -69,7 +73,8 @@ class Sidebar extends Component {
 
 	render() {
 		return (
-			<div  id="sidebar-container">
+			<div id="sidebar-container">
+				<SearchBox></SearchBox>
 				<div id="sidebar-list-container">
 					{this.props.maps.placesList}
 				</div>
