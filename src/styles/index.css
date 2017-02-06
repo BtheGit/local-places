@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
+@import 'map.css';
+@import 'placescreen.css';
+@import 'sidebar.css';
+@import 'ui-elements.css';
+
+html, body {
+	width: 100%;
+	height: 100%;
+	font-family: 'PT Sans', sans-serif;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+@define-mixin test {
+  color: red !important;
+	background: red !important;
+}
+
+.iwThumbnail {
+	height: 30%;
+	width: 30%;
+}
+
+.collapsible-container__trigger {
+	cursor: pointer;
+	display: block;
+	text-color: blue;
+	height: 100%;
+	padding: 5px 15px;
+}
+
+.collapsible-container__contentInner {
+	background: #fff;
+	padding: 5px 15px;
+	color: gray;
+}

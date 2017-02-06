@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { maps } from './reducers/index';
 import App from './App';
-import './index.css';
+import './styles/index.css';
 
 const store = applyMiddleware(thunk)(createStore)(combineReducers({maps}));
 
@@ -19,4 +19,3 @@ if(root) {
     document.getElementById('root')
   );
 }
-

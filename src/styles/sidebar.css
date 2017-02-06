@@ -1,0 +1,46 @@
+#sidebar-component {
+	position: absolute;
+	width: 30%;
+	height: 100%;
+	float: right;
+	top: 0;
+	right: 0;
+	box-shadow: -1px 0px 8px  black;
+	overflow-y: scroll;
+}
+
+#sidebar-container {
+	width: 100%;
+}
+
+#sidebar-list-container {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	display: block;
+}
+
+.sidebar-place {
+	width: 100%;
+	text-align: center;
+	list-style: none;
+	display: block;
+	border-bottom: 1px solid #f6f2ed;
+}
+
+.sidebar-place:nth-child(even) {
+	background-color: #fbfaf8;
+}
+
+.sidebar-place:hover {
+	background-color: #e8d6c4;
+}
+
+.sidebar-place-manualHover {
+	background-color: #e8d6c4 !important;
+}
+
+.sidebar-place-selected {
+	background-color: #da9a55 !important;
+	color: #fff;
+}
