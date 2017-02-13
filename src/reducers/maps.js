@@ -38,7 +38,7 @@ const initialState = {
          { "featureType": "water", "elementType": "labels", "stylers": [ { "lightness": -25 }, { "saturation": -100 } ] }
       ]  
     },
-    currentMapStyle: 'brendan',
+    currentMapStyle: '',
     placesList: [],
     highlightedPlaceID: '',
     markersArray: [],

@@ -8,9 +8,9 @@ class Map extends Component {
 	}
 
 
- 	connectMarkers(markersArray, map) {
- 		return markersArray.map(function(marker) {
- 			return marker.setMap(map)
+ 	connectMarkers(placesArray, map) {
+ 		return placesArray.map(function(place) {
+ 			return place.marker.setMap(map)
  		})
  	}
 
@@ -33,7 +33,7 @@ class Map extends Component {
           styles: this.props.maps.styles[this.props.maps.currentMapStyle]
         });
 
-        setTimeout(() => {this.connectMarkers(this.props.markers, map)}, 100) //SHITTY - figure out a less hacky way!!
+        setTimeout(() => {this.connectMarkers(this.props.places, map)}, 100) //SHITTY - figure out a less hacky way!!
 
 	}
 

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import {asyncPopulatePlacesList, viewPlacescreen} from '../actions/actions';
+import {
+	updatePlaces,
+	viewPlacescreen
+} from '../actions/actions';
 import {connect} from 'react-redux';
 import Collapsible from './Collapsible';
 import SearchBox from './SearchBox';
@@ -14,9 +17,54 @@ class Sidebar extends Component {
 	//to store the clicked item so that it can be remembered and closed before the next one is opened
 
 
-	showPlaces(placesArray) {
+	// buildSidebarPlaces(placesArray) {
+	// 	for (let i = 0; i < placesArray.length; i++) {
 
-		const placesList = [];
+	// 		const category = placesArray[i].category,
+	// 			subCategory = placesArray[i].subCategory;
+	// 		const iconPath = icons[subCategory] || icons[category] || icons["Default"];
+
+	// 		//Dirty code to build trigger with SVG icons from map-icons.com
+	// 		//TODO is to color coordinate these with markers. Also to have both pull from the same source ultimately.
+	// 		//TODO separate into component
+	// 		const iconClassName = `sidebar-icon sidebar-icon-${subCategory || category || 'Default' }`
+	// 		const svgIcon = (<svg className={iconClassName} style={{fill: iconPath['color']}} key={i} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="-293.5 385 18 21" overflow="inherit">
+	// 		<path fill-rule="evenodd" clip-rule="evenodd" d="M-275.5,394c0-5-4-9-9-9s-9,4-9,9c0,3.6,2.1,6.6,5.1,8.1l3.9,3.9l3.9-3.9C-277.6,400.6-275.5,397.6-275.5,394z"/>
+	// 		</svg>);
+	// 		const triggerText = [ svgIcon, placesArray[i].title ];
+
+	// 		const id = placesArray[i].id; 
+	// 		const placeId = 'place' + id; 
+	// 		placesArray[i]['sidebar'] = (
+
+	// 			<div>
+	// 				<Collapsible
+	// 					trigger={ triggerText }
+	// 					transitionTime={150}
+	// 					classParentString={'collapsible-container'}
+	// 				>
+	// 					<div
+	// 						key={i}
+	// 						className='sidebar-place'
+	// 						id={placeId}
+	// 						onClick={()=> this.props.selectMenuItem(placesArray[i])}
+	// 						onMouseOver={() => this.props.maps.placesArray[i].marker.setIcon(this.props.maps.markerIcons.Highlighted)}
+	// 						onMouseOut={() => this.props.maps.placesArray[i].marker.setIcon(this.props.maps.markerIcons[placesArray[i].subCategory] || this.props.maps.markerIcons[placesArray[i].category] || this.props.maps.markerIcons.Default)}
+	// 					>
+
+	// 						<p>{placesArray[i].summary}</p>
+	// 						<a className="btn btn-primary" onClick={(e) => this.props.dispatch(viewPlacescreen(id))}>+ Detail</a>
+	// 					</div>
+
+	// 				</Collapsible>
+	// 			</div>
+
+	// 		)
+
+	// 	}
+	// 	return placesArray;
+	// }
+	buildSidebarPlaces(placesArray) {
 		for (let i = 0; i < placesArray.length; i++) {
 
 			const category = placesArray[i].category,
@@ -27,28 +75,28 @@ class Sidebar extends Component {
 			//TODO is to color coordinate these with markers. Also to have both pull from the same source ultimately.
 			//TODO separate into component
 			const iconClassName = `sidebar-icon sidebar-icon-${subCategory || category || 'Default' }`
-			// const svgIcon = <svg className={iconClassName} style={{fill: iconPath['color']}} key={i} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 50 50" overflow="inherit"><path d={iconPath['path']}/></svg>;
 			const svgIcon = (<svg className={iconClassName} style={{fill: iconPath['color']}} key={i} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="-293.5 385 18 21" overflow="inherit">
 			<path fill-rule="evenodd" clip-rule="evenodd" d="M-275.5,394c0-5-4-9-9-9s-9,4-9,9c0,3.6,2.1,6.6,5.1,8.1l3.9,3.9l3.9-3.9C-277.6,400.6-275.5,397.6-275.5,394z"/>
 			</svg>);
 			const triggerText = [ svgIcon, placesArray[i].title ];
 
-			const id = Number(JSON.stringify(JSON.parse(i))) + 1 //NOTE: So callbacks reference the current value of i not the final value
-			const placeId = 'place' + id //NOTE: id and array position are off by one.
-			placesList.push(
+			const id = placesArray[i].id; 
+			const placeId = 'place' + id; 
+			placesArray[i]['sidebar'] = (
 
 				<div
 					key={i}
 					className='sidebar-place'
-					id={placeId}
+					// id={placeId}
 					onClick={()=> this.props.selectMenuItem(placesArray[i])}
-					onMouseOver={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons.Highlighted)}
-					onMouseOut={() => this.props.maps.markersArray[i].setIcon(this.props.maps.markerIcons[placesArray[i].subCategory] || this.props.maps.markerIcons[placesArray[i].category] || this.props.maps.markerIcons.Default)}
+					onMouseOver={() => this.props.maps.placesArray[i].marker.setIcon(this.props.maps.markerIcons.Highlighted)}
+					onMouseOut={() => this.props.maps.placesArray[i].marker.setIcon(this.props.maps.markerIcons[placesArray[i].subCategory] || this.props.maps.markerIcons[placesArray[i].category] || this.props.maps.markerIcons.Default)}
 				>
 					<Collapsible
 						trigger={ triggerText }
 						transitionTime={150}
 						classParentString={'collapsible-container'}
+						idParentString={placeId}
 					>
 						<p>{placesArray[i].summary}</p>
 						<a className="btn btn-primary" onClick={(e) => this.props.dispatch(viewPlacescreen(id))}>+ Detail</a>
@@ -56,19 +104,27 @@ class Sidebar extends Component {
 				</div>
 
 			)
+
 		}
-		return placesList;
+		return placesArray;
+	}
+
+	showPlaces = (placesArray) => {
+		return placesArray.map((place) => {
+			return place.sidebar;
+		})
 	}
 
 
 	//############## Lifecycle Functions ##########################
 
 	componentDidMount() {
-
-		let placesBuild = new Promise( (resolve, reject) => {
-					resolve(this.props.dispatch(asyncPopulatePlacesList(this.showPlaces(this.props.maps.placesArray))))
-			})
-		//still trying to figure out best way to add eventlisteners after places are populated, promise or thunk or both
+		this.props.dispatch(
+			updatePlaces(
+				this.buildSidebarPlaces(
+					this.props.maps.placesArray)
+				)
+			)
 	}
 
 	render() {
@@ -76,7 +132,7 @@ class Sidebar extends Component {
 			<div id="sidebar-container">
 				<SearchBox></SearchBox>
 				<div id="sidebar-list-container">
-					{this.props.maps.placesList}
+					{this.showPlaces(this.props.maps.placesArray)}
 				</div>
 			</div>
 

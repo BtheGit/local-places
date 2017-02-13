@@ -1,9 +1,8 @@
-import placesFromDB from '../api/places.js'
 
-export function updatePlaces() {
+export function updatePlaces(placesArray) {
   return {
     type: 'UPDATE_PLACES',
-    payload: placesFromDB
+    payload: placesArray
   }
 }
 
@@ -93,11 +92,11 @@ export function changeMapStyle(style) {
   }
 }
 
-export function asyncPopulatePlacesFromDB() {
-  return function (dispatch) {
-    dispatch(updatePlaces());
-  }
-}
+// export function asyncPopulatePlacesFromDB() {
+//   return function (dispatch) {
+//     dispatch(updatePlaces());
+//   }
+// }
 
 export function asyncHighlightPlace(placeID) {
   return function (dispatch) {

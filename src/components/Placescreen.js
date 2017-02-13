@@ -41,7 +41,7 @@ class Place extends Component {
         } = this.state;
         const images = this.props.place[0].imagesArray;
 		return (
-			<div className="placescreen">
+			<div className="placescreen" key={this.props.key}>
 				<a id="placescreen-btn-close" onClick={(e) => this.props.dispatch(hidePlacescreen())}>✕</a>
 				{this.renderPlace(this.props.place[0])}
 

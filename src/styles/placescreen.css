@@ -25,3 +25,22 @@
 .placescreen-desc {
 	white-space: pre-line;
 }
+
+.example-enter {
+  left: -1500px;
+}
+
+.example-enter.example-enter-active {
+  left: 0;
+  transition: all 800ms ease;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+

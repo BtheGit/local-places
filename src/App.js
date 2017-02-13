@@ -6,7 +6,7 @@ import Placescreen from './components/Placescreen';
 import Formscreen from './components/Formscreen';
 import { connect } from 'react-redux';
 import {
-	asyncPopulatePlacesFromDB,
+	updatePlaces,
 	selectMarker,
 	focusInfoWindow,
 	populateMarkers,
@@ -19,6 +19,8 @@ import {
 	viewPlacescreen
 } from './actions/actions';
 import icons from './media/inlineIcons';
+import placesFromDB from './api/places.js';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 
@@ -30,7 +32,7 @@ class App extends Component {
 
 	componentDidMount() {
 		const initializeStore = new Promise((resolve, reject) => {
-			resolve(this.props.dispatch(asyncPopulatePlacesFromDB()))
+			resolve(this.props.dispatch(updatePlaces(placesFromDB)))
 		})
 			.then(() => {
 				//build generic infowindow which will be reused at each instance to prevent multiple instances
@@ -51,25 +53,32 @@ class App extends Component {
 
 	}
 
-	//CURRENTLY UNUSED
-	selectMapMarker(place) {
-		//locate corresponding marker when place is selected to highlight it
-		const selectedMarker = this.props.maps.markersArray.filter((marker, index) => {
-			if (marker.id === place.id) {
-				return marker;
-			}
-		});
-		//selectedMarker filter returns an array, we only want the first result
-		this.props.dispatch(selectMarker(selectedMarker[0].id));
-		this.props.dispatch(focusInfoWindow(selectedMarker[0]));
-	}
+	// //CURRENTLY UNUSED
+	// selectMapMarker(menuItem) {
+	// 	//locate corresponding marker when place is selected to highlight it
+	// 	const selectedMarker = this.props.maps.placesArray.filter((place, index) => {
+	// 		if (place.id === menuItem.id) {
+	// 			return place.marker;
+	// 		}
+	// 	});
+	// 	// const selectedMarker = this.props.maps.markersArray.filter((marker, index) => {
+	// 	// 	if (marker.id === place.id) {
+	// 	// 		return marker;
+	// 	// 	}
+	// 	// });
+
+
+	// 	//selectedMarker filter returns an array, we only want the first result
+	// 	this.props.dispatch(selectMarker(selectedMarker[0].id));
+	// 	 this.props.dispatch(focusInfoWindow(selectedMarker[0]));
+	// }
 
 	selectMenuItem(place) {
 		//Function passed to Sidebar to allow it to also select marker on the map
 		this.highlightSelectedPlace(place.id);
-		// this.selectMapMarker(place); not implemented
 
 	}
+
 
 	highlightSelectedPlace = placeId => {
 		//Used to manually select a place from sidebar when clicking on a map marker
@@ -90,7 +99,6 @@ class App extends Component {
 	buildMarkers(places) {
 
 		let self = this;
-		const markersArray = [];
 		for (let i = 0; i < places.length; i++) {
 
 			//marker is created without map reference which is added in Map component after new google map is created
@@ -111,9 +119,10 @@ class App extends Component {
 	        marker.addListener('click', function() {
 	        	//this is to fix the multiple highlighted and animated markers. But requires looping through all markers.
 	        	//TODO: need to refactor code to start tracking current marker not just its id (which I'm not doing despite the bad variable name)
-	        	for (let i in self.props.maps.markersArray) {
-	        		self.props.maps.markersArray[i].setAnimation(null)
-	        		self.props.maps.markersArray[i].setIcon(self.props.maps.markerIcons[places[i].subCategory] ||self.props.maps.markerIcons[places[i].category]|| self.props.maps.markerIcons.Default);
+	        	for (let i in self.props.maps.placesArray) {
+
+	        		self.props.maps.placesArray[i].marker.setAnimation(null)
+	        		self.props.maps.placesArray[i].marker.setIcon(self.props.maps.markerIcons[places[i].subCategory] ||self.props.maps.markerIcons[places[i].category]|| self.props.maps.markerIcons.Default);
 	        	}
 
 				self.populateInfoWindow(marker, self.largeInfowindow);
@@ -124,7 +133,7 @@ class App extends Component {
 	        marker.addListener('mouseover', () => {
 	        	document.getElementById('place' + marker.id).classList.add('sidebar-place-manualHover'); //hover PlacesList elem
 	        	marker.setIcon(this.props.maps.markerIcons.Highlighted);
-	        	this.props.dispatch(asyncHighlightPlace(marker.id));
+	        	this.props.dispatch(highlightPlace(marker.id));
 	        });
 
 	        marker.addListener('mouseout', () => {
@@ -132,20 +141,26 @@ class App extends Component {
 	        	if(marker.animation === null){
 	        		document.getElementById('place' + marker.id).classList.remove('sidebar-place-manualHover');
 	 	        	marker.setIcon(this.props.maps.markerIcons[places[i].subCategory] ||this.props.maps.markerIcons[places[i].category]|| this.props.maps.markerIcons.Default);
-	 	        	this.props.dispatch(asyncUnhighlightPlace());
+	 	        	this.props.dispatch(unhighlightPlace());
 	        	}
 	        });
 
-   	        markersArray.push(marker);
+	        places[i]['marker'] = marker;
 
         }
-        this.props.dispatch(populateMarkers(markersArray));
+        this.props.dispatch(updatePlaces(places));
 	}
 
 	//TODO: Detail button inside infowindow not working. Throwing error. Need to fix and then set it to close the infowindow
 	//when the detail view loads (separate clearing infowindow into a separate function and track current infowindow in store)
 
+	infowindowButtonOnClick(event) {
+		console.log(event)
+	}
+
     populateInfoWindow(marker, infowindow) {
+
+
     	if (infowindow.marker != marker) {
     		infowindow.setContent('');
     		infowindow.marker = marker;
@@ -168,7 +183,7 @@ class App extends Component {
     	    	    							 <div class="iwDescription">${marker.description}</div>
     	    	    							 <br/>
     	    	    							 <div class="iwAddress">Address: ${marker.address}</div>
-    	    	    							 <a class="btn btn-primary" onClick=${(e) => {this.props.dispatch(viewPlacescreen(id))}}>Detail</a>
+    	    	    							 <button class="btn btn-primary" id="infowindowDetailButton" onclick="${this.infowindowButtonOnClick()}">Detail</button>
     	    	    						</div>`;
     	infowindow.setContent(newContent);
         infowindow.open(map, marker);
@@ -211,11 +226,15 @@ class App extends Component {
 
 
     	return (
-    		<Placescreen
-    			place={currentPlace}
-    			dispatch={this.props.dispatch}
-    		>
-    		</Placescreen>
+
+
+			        <Placescreen
+			        	key={currentPlace.id}
+		    			place={currentPlace}
+		    			dispatch={this.props.dispatch}
+		    		>
+		    		</Placescreen>	
+
     	)
     }
 
@@ -224,9 +243,17 @@ class App extends Component {
 			return (
 				<div id="app-wrapper">
 					<div id="map-component">
-						{this.props.maps.placescreenActive ? this.renderPlacescreen() : false}
+				        <ReactCSSTransitionGroup
+				          transitionName="example"
+				          transitionEnterTimeout={800}
+				          transitionLeaveTimeout={300}
+				        >
+							{this.props.maps.placescreenActive ? this.renderPlacescreen() : false}
+
+				        </ReactCSSTransitionGroup>
+
 						<Mapscreen
-							markers={this.props.maps.markersArray}
+							places={this.props.maps.placesArray}
 						/>
 					</div>
 					<div id="sidebar-component">
