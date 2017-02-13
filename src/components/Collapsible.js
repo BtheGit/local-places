@@ -1,6 +1,6 @@
 //from https://github.com/glennflanagan/react-collapsible/
 import React from 'react';
-
+import SidebarPlace from './SidebarPlace';
 
 var Collapsible = React.createClass({
 
@@ -20,7 +20,6 @@ var Collapsible = React.createClass({
       React.PropTypes.string,
       React.PropTypes.element
     ]),
-    lazyRender: React.PropTypes.bool,
     overflowWhenOpen: React.PropTypes.oneOf([
       'hidden',
       'visible',
@@ -39,7 +38,6 @@ var Collapsible = React.createClass({
       easing: 'linear',
       open: false,
       classParentString: 'Collapsible',
-      lazyRender: false,
       overflowWhenOpen: 'hidden'
     };
   },
@@ -198,18 +196,18 @@ var Collapsible = React.createClass({
     //If user wants different text when tray is open
     var trigger = (this.state.isClosed === false) && (this.props.triggerWhenOpen !== undefined) ? this.props.triggerWhenOpen : this.props.trigger;
 
-    // Don't render children until the first opening of the Collapsible if lazy rendering is enabled
-    var children = this.props.children;
-    if(this.props.lazyRender)
-      if(!this.state.hasBeenOpened)
-          children = null;
 
     return(
       <div className={this.props.classParentString} >
         <span className={this.props.classParentString + "__trigger" + ' ' + openClass} id={this.props.idParentString} onClick={this.handleTriggerClick}>{trigger}</span>
         <div className={this.props.classParentString + "__contentOuter" } ref="outer" style={dropdownStyle}>
           <div className={this.props.classParentString + "__contentInner"} ref="inner">
-            {children}
+            <SidebarPlace 
+              key={this.props.key}
+              highlightSelectedPlace={this.props.highlightSelectedPlace}
+              dispatch={this.props.dispatch}
+              place={this.props.place}
+            />
           </div>
         </div>
       </div>
