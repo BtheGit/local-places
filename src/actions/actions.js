@@ -6,24 +6,10 @@ export function updatePlaces(placesArray) {
   }
 }
 
-export function populateMarkers(markersArray) {
-  return {
-    type: 'POPULATE_MARKERS',
-    payload: markersArray
-  }
-}
-
 export function populatePlacesList(placesList) {
   return {
     type: 'POPULATE_PLACESLIST',
     payload: placesList
-  }
-}
-
-export function loadInfoWindow(infoWindow) {
-  return {
-    type: 'LOAD_INFOWINDOW',
-    payload: infoWindow
   }
 }
 
@@ -92,11 +78,6 @@ export function changeMapStyle(style) {
   }
 }
 
-// export function asyncPopulatePlacesFromDB() {
-//   return function (dispatch) {
-//     dispatch(updatePlaces());
-//   }
-// }
 
 export function asyncHighlightPlace(placeID) {
   return function (dispatch) {

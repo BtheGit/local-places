@@ -41,9 +41,7 @@ const initialState = {
     currentMapStyle: '',
     placesList: [],
     highlightedPlaceID: '',
-    markersArray: [],
     markerIcons: {},
-    infoWindow: '',
     infoWindowIsActive: false,
     activeInfoWindow: {},
     placescreenActive: false,
@@ -58,20 +56,10 @@ const maps = (state = initialState, action) => {
         ...state,
         placesArray: action.payload
       })
-    case 'POPULATE_MARKERS':
-      return({
-        ...state,
-        markersArray: action.payload
-      })
     case 'POPULATE_PLACESLIST':
       return({
         ...state,
         placesList: action.payload
-      })
-    case 'LOAD_INFOWINDOW':
-      return({
-        ...state,
-        infoWindow: action.payload
       })
     case 'ADD_MARKERICON':
       return ({
