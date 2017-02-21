@@ -108,7 +108,7 @@ const places =  [
     address: '',
     website: '',
     hours: '',
-    description: ``,
+    description: `A great place to bowl.`,
 
   },
   { 
@@ -125,7 +125,7 @@ const places =  [
     address: '',
     website: '',
     hours: '',
-    description: ``,
+    description: `A great place to swim.`,
 
   },
   { 
@@ -142,7 +142,7 @@ const places =  [
     address: '',
     website: '',
     hours: '',
-    description: ``,
+    description: `Some of the most authentic baguettes in town.`,
 
   },
   { 
@@ -159,7 +159,7 @@ const places =  [
     address: '',
     website: '',
     hours: '',
-    description: ``,
+    description: `Cheap Pakistani/Indian food with freshly made chapatis.`,
 
   },
   { 
@@ -176,7 +176,7 @@ const places =  [
     address: '',
     website: '',
     hours: '',
-    description: ``,
+    description: `The best patisserie in town!`,
 
   },
   { 
@@ -193,7 +193,7 @@ const places =  [
     address: 'No. 167, Xinhai Rd, Zuoying District, Kaohsiung City, Taiwan 813',
     website: '',
     hours: '',
-    description: ``,
+    description: `The best patisserie in town!`,
 
   },
   { 

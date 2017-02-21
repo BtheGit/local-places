@@ -11,7 +11,7 @@ class SidebarPlace extends Component {
 
 		return (
 			<div
-				key={this.props.key}
+				key={this.props.iterKey}
 				className='sidebar-place'
 				id={'place' + this.props.place.id}
 				onClick={()=> this.props.highlightSelectedPlace(this.props.place.id)}

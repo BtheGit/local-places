@@ -78,6 +78,7 @@ class App extends Component {
             return ( <div>'error: could not load from database'</div> )
         }
     }
+    
 }
 
 function mapStateToProps(state) {

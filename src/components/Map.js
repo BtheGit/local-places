@@ -32,7 +32,7 @@ class Map extends Component {
         this.setState({map})   		
 	}
 
-
+	//Markers are generated before the Google map. This injects the map reference into each marker after the map is generated.
  	connectMarkers(placesArray, map) {
  		return placesArray.map(function(place) {
  			return place.marker.setMap(map)

@@ -6,10 +6,16 @@ export function updatePlaces(placesArray) {
   }
 }
 
-export function populatePlacesList(placesList) {
+export function filterPlaces(filtered) {
   return {
-    type: 'POPULATE_PLACESLIST',
-    payload: placesList
+    type: 'FILTER_PLACES',
+    payload: filtered
+  }
+}
+
+export function clearFilter() {
+  return {
+    type: 'CLEAR_FILTER'
   }
 }
 

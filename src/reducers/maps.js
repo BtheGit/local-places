@@ -39,7 +39,8 @@ const initialState = {
       ]  
     },
     currentMapStyle: '',
-    placesList: [],
+    filterActive: false,
+    filteredPlaces: [],
     highlightedPlaceID: '',
     markerIcons: {},
     infoWindowIsActive: false,
@@ -56,10 +57,16 @@ const maps = (state = initialState, action) => {
         ...state,
         placesArray: action.payload
       })
-    case 'POPULATE_PLACESLIST':
+    case 'FILTER_PLACES':
       return({
         ...state,
-        placesList: action.payload
+        filterActive: true,
+        filteredPlaces: action.payload
+      })
+    case 'CLEAR_FILTER':
+      return({
+        ...state,
+        filterActive: false
       })
     case 'ADD_MARKERICON':
       return ({
