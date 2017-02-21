@@ -11,6 +11,8 @@ class SearchBox extends Component {
 	}
 
 	filterSearch = (event) => {
+		//BUG: If user types ' ' first, throws an error
+
 		//Reset filterActive toggle so Markers and Sidebar generate based on default array not filtered array
 		if (event.target.value === '') {
 			this.props.dispatch(clearFilter());
@@ -28,14 +30,15 @@ class SearchBox extends Component {
 			filtered.push(wordFilter(textArray[i], this.props.maps.placesArray))
 		}
 
-
 		//Compare list of matches lists and save only the intersections (ones that are common to all)
 		if (filtered.length > 1) {
 			filtered = intersect(filtered);
 			this.props.dispatch(filterPlaces([...filtered]));
-		} else {
-			this.props.dispatch(filterPlaces(filtered[0]))
-		}
+		} else if (filtered.length === 1){ 
+			if (filtered[0][0] !== ''){ //to avoid adding empty string to filtered list in store
+				this.props.dispatch(filterPlaces(filtered[0]));
+			}
+		} 
 
 
 		function wordFilter (text, array) {
@@ -56,11 +59,10 @@ class SearchBox extends Component {
 			let a = new Set(array[0]);
 			for (let i = 1; i < array.length; i++) {
 				let b = new Set(array[i]);
-				let intersection = new Set(
-					[...a].filter(x => b.has(x)));				
-				a = [...intersection] //converts Set of intersections back into array
+				let intersection = new Set([...a].filter(x => b.has(x)));				
+				a = [...intersection]; //converts Set of intersections back into array
 			}
-			return a
+			return a;
 		}
 
 		//TODO: change markers to render based on filteredPlaces, not placesArray (if filteredPlaces is empty, render placesArray)

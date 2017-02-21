@@ -62,8 +62,10 @@ class App extends Component {
                           {this.props.maps.placescreenActive ? this.renderPlacescreen() : false}
                       </ReactCSSTransitionGroup>
                       <Mapscreen 
-                      	places = {this.props.maps.placesArray}
                       	highlightSelectedPlace = {this.highlightSelectedPlace}
+                      	filteredPlaces = {this.props.maps.filteredPlaces}
+                      	filterActive = {this.props.maps.filterActive}
+                      	placesArray = {this.props.maps.placesArray}
                       />
                   </div>
                   <div id="sidebar-component">
@@ -78,7 +80,7 @@ class App extends Component {
             return ( <div>'error: could not load from database'</div> )
         }
     }
-    
+
 }
 
 function mapStateToProps(state) {

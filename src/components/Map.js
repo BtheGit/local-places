@@ -16,7 +16,8 @@ class Map extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			map: ''
+			map: '',
+			loaded: false
 		}
         this.infowindowButtonOnClick = this.infowindowButtonOnClick.bind(this);
 
@@ -165,16 +166,47 @@ class Map extends Component {
         return newMarker
     }
 
+    //TODO
+    filterMarkers() {
+		for (let i = 0; i < this.props.maps.placesArray.length; i++) {
+	    		this.props.maps.placesArray[i].marker.setMap(this.state.map)
+	    	}
+    	if (this.props.filterActive) {
+	    	for (let i = 0; i < this.props.maps.placesArray.length; i++) {
+	    		if(!this.props.maps.filteredPlaces.includes(this.props.maps.placesArray[i])) {
+	    			this.props.maps.placesArray[i].marker.setMap(null)
+	    		} 
+	    	}
+    	} 
+	}
+ //    filterMarkers() {
+ //    	if (this.props.filterActive) {
+ //    	    	for (let i = 0; i < this.props.maps.placesArray.length; i++) {
+ //    	    		if(this.props.maps.filteredPlaces.includes(this.props.maps.placesArray[i])) {
+ //    	    			this.props.maps.placesArray[i].marker.setMap(this.state.map)
+ //    	    		} else {
+ //    	    			this.props.maps.placesArray[i].marker.setMap(null)
+ //    	    		}
+ //    	    	}
+ //    	} else {
+ //    		for (let i = 0; i < this.props.maps.placesArray.length; i++) {
+ //    	    		this.props.maps.placesArray[i].marker.setMap(this.state.map)
+ //    	    	}
+	//     }
+	// }
+    
+
 
 	//+++++++++++++++++REACT LIFECYCLE FUNCTIONS++++++++++++++++++++++++
 
-	shouldComponentUpdate() {
-		//do not let the map continue to rebuild on every update to Map component. instead updates will be handled by 
-		//componentDidReceiveProps instead
-		//question: does this mean I should not bind props to state here and instead only pass props to Map from App,
-		//by binding am I negating the benefits of minimal component updates?
-		return false;
-	}
+	//deprecated to allow component to rerender for marker filtering
+	// shouldComponentUpdate() {
+	// 	//do not let the map continue to rebuild on every update to Map component. instead updates will be handled by 
+	// 	//componentDidReceiveProps instead
+	// 	//question: does this mean I should not bind props to state here and instead only pass props to Map from App,
+	// 	//by binding am I negating the benefits of minimal component updates?
+	// 	return false;
+	// }
 
 	componentDidMount() {
 
@@ -198,21 +230,24 @@ class Map extends Component {
          		this.buildMap();
             })
             .then(() => {
-            	this.connectMarkers(this.props.places, this.state.map);
+            	this.connectMarkers(this.props.maps.placesArray, this.state.map);
+            	this.setState({loaded: true})
             })		
 
-
-
-        // setTimeout(() => {this.connectMarkers(this.props.places, map)}, 100) //SHITTY - figure out a less hacky way!!
-
 	}
 
-	componentWillReceiveProps() {
-
-
+	componentWillUnmount() {
+		this.setState({loaded: false})
 	}
+
+	//deprecated
+	// componentWillReceiveProps() {
+	// }
 
 	render() {
+		if (this.state.loaded) {
+			this.filterMarkers();
+		}
 		return (
 			<div id="map" ref="map" style={{height: '100%'}}></div>
 		)
