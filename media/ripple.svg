@@ -1,0 +1,29 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="234.56310679611667 194.5630949446299 134.9514563106798 134.95145631067967" width="134.95" height="134.95">
+    <defs xml:id="ripples">
+        <path d="M369.51 262.04C369.51 299.28 339.28 329.51 302.04 329.51C264.8 329.51 234.56 299.28 234.56 262.04C234.56 224.8 264.8 194.56 302.04 194.56C339.28 194.56 369.51 224.8 369.51 262.04Z" id="a1AW79bJbb"></path>
+        <path d="M353.01 262.04C353.01 290.17 330.17 313.01 302.04 313.01C273.91 313.01 251.07 290.17 251.07 262.04C251.07 233.91 273.91 211.07 302.04 211.07C330.17 211.07 353.01 233.91 353.01 262.04Z" id="bG4gv1PFi"></path>
+        <path
+            d="M353.69 231.13C359.12 240.17 362.23 250.74 362.23 262.04C362.23 295.26 335.26 322.23 302.04 322.23C268.82 322.23 241.84 295.26 241.84 262.04C241.84 228.82 268.82 201.84 302.04 201.84C323.97 201.84 343.17 213.59 353.69 231.13Z"
+            id="b1SrM9ohx"></path>
+    </defs>
+    <g visibility="inherit" id="ripples">
+        <g visibility="inherit">
+            <use xlink:href="#a1AW79bJbb" opacity="1" fill="#ffffff" fill-opacity="0"></use>
+            <g>
+                <use xlink:href="#a1AW79bJbb" opacity="1" fill-opacity="0" stroke="#00c4ff" stroke-width="1" stroke-opacity="1"></use>
+            </g>
+        </g>
+        <g visibility="inherit">
+            <use xlink:href="#bG4gv1PFi" opacity="1" fill="#ffffff" fill-opacity="0"></use>
+            <g>
+                <use xlink:href="#bG4gv1PFi" opacity="1" fill-opacity="0" stroke="#00c4ff" stroke-width="2" stroke-opacity="1"></use>
+            </g>
+        </g>
+        <g visibility="inherit">
+            <use xlink:href="#b1SrM9ohx" opacity="1" fill="#ffffff" fill-opacity="0"></use>
+            <g>
+                <use xlink:href="#b1SrM9ohx" opacity="1" fill-opacity="0" stroke="#00c4ff" stroke-width="1" stroke-opacity="1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

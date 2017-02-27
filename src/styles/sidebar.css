@@ -1,6 +1,7 @@
 :root {
   --color-sidebar-title: #5060a0;
   --color-sidebar-shadow: rgba(120, 133, 183, 0.2);
+  --color-category-1: #56dd8f;
 }
 
 #sidebar-component {
@@ -50,7 +51,7 @@
   }
   padding: 20px 0;
   width: 100%;
-  background: #56dd8f;
+  background: var(--color-category-1);
 }
 
 .sidebar-place {
