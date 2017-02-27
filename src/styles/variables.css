@@ -1,0 +1,13 @@
+:root {
+  --color-category-food: #f0a275;
+  --color-category-food-light: #f7aa7d;
+  --color-category-food-dark: #e99869;
+
+  --color-category-recreation: #757fba;
+  --color-category-recreation-light: #808ac6;
+  --color-category-recreation-dark: #6c76b2;
+
+  --color-category-nature: #56dd8f;
+  --color-category-nature-light: #6ce7a0;
+  --color-category-nature-dark: #56ce89;
+}

@@ -21,10 +21,10 @@ class Place extends Component {
 	}
 
 	renderPlace(place) {
-
+		const category = place.category ? 'cat-'+place.category.toLowerCase() : '';
 
 		return(
-			<div className="wrapper">
+			<div className={'wrapper '+category}>
 				<div className="hero-col">
 					<div className="col-inner-wrapper">
 						<a id="placescreen-btn-close" onClick={(e) => this.props.dispatch(hidePlacescreen())}>✕</a>

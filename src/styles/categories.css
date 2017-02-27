@@ -1,0 +1,44 @@
+.cat-food {
+	& .hero-col {
+		background-color: var(--color-category-food);
+	}
+  & .website-link {
+    &:hover {
+      color: var(--color-category-food-dark);
+    }
+    background: var(--color-category-food-dark);
+  }
+  & .title-separator {
+		border: 2px solid var(--color-category-food-light);
+	}
+}
+
+.cat-nature {
+	& .hero-col {
+		background-color: var(--color-category-nature);
+	}
+  & .website-link {
+    &:hover {
+      color: var(--color-category-nature-dark);
+    }
+    background: var(--color-category-nature-dark);
+  }
+  & .title-separator {
+		border: 2px solid var(--color-category-nature-light);
+	}
+}
+
+.cat-recreation {
+	& .hero-col {
+		background-color: var(--color-category-recreation);
+	}
+  & .website-link {
+    &:hover {
+      color: var(--color-category-recreation-dark);
+    }
+    background: var(--color-category-recreation-dark);
+  }
+  & .title-separator {
+		border: 2px solid var(--color-category-recreation-light);
+	}
+}

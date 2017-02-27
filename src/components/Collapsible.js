@@ -191,7 +191,6 @@ var Collapsible = React.createClass({
   },
 
   handleHoverOff: function() {
-    console.log(this.props.markerIcons);
     this.props.place.marker.setIcon(this.props.markerIcons[this.props.place.subCategory] || this.props.markerIcons[this.props.place.category] || this.props.markerIcons.Default);
     this.props.dispatch(unhighlightPlace());
   },
