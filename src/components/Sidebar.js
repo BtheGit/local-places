@@ -26,8 +26,8 @@ class Sidebar extends Component {
 			</svg>);
 
 			const triggerText = [ svgIcon, placesArray[i].title ];
-			const id = placesArray[i].id; 
-			const placeId = 'place' + id; 
+			const id = placesArray[i].id;
+			const placeId = 'place' + id;
 
 			placesArray[i]['sidebar'] = (
 				<Collapsible
@@ -76,12 +76,12 @@ class Sidebar extends Component {
 			<div id="sidebar-container">
 				<SearchBox></SearchBox>
 				<div id="sidebar-list-container">
-					{this.props.maps.filterActive && this.props.maps.searchActive ? 
-						this.showPlaces(this.props.maps.foundPlaces) : 
-						this.props.maps.searchActive ? 
+					{this.props.maps.filterActive && this.props.maps.searchActive ?
+						this.showPlaces(this.props.maps.foundPlaces) :
+						this.props.maps.searchActive ?
 							this.showPlaces(this.props.maps.foundPlaces) :
 							this.props.maps.filterActive ?
-								this.showPlaces(this.props.maps.filteredPlaces) : 
+								this.showPlaces(this.props.maps.filteredPlaces) :
 								this.showPlaces(this.props.maps.placesArray)
 					}
 				</div>
