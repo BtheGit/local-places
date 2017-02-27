@@ -64,6 +64,7 @@ class App extends Component {
                       <Mapscreen 
                       	highlightSelectedPlace = {this.highlightSelectedPlace}
                       	filteredPlaces = {this.props.maps.filteredPlaces}
+                      	searchActive = {this.props.maps.searchActive}
                       	filterActive = {this.props.maps.filterActive}
                       	placesArray = {this.props.maps.placesArray}
                       />

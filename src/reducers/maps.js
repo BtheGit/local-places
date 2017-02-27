@@ -40,7 +40,10 @@ const initialState = {
     },
     currentMapStyle: '',
     filterActive: false,
+    filterType: '',
+    searchActive: false,
     filteredPlaces: [],
+    foundPlaces: [],
     highlightedPlaceID: '',
     markerIcons: {},
     infoWindowIsActive: false,
@@ -57,11 +60,23 @@ const maps = (state = initialState, action) => {
         ...state,
         placesArray: action.payload
       })
-    case 'FILTER_PLACES':
+    case 'SEARCH_PLACES':
+      return({
+        ...state,
+        searchActive: true,
+        foundPlaces: action.payload
+      })
+    case 'CLEAR_SEARCH':
+      return({
+        ...state,
+        searchActive: false
+      })
+    case 'APPLY_FILTER':
       return({
         ...state,
         filterActive: true,
-        filteredPlaces: action.payload
+        filterType: action.type,
+        filteredPlaces: action.filteredPlaces
       })
     case 'CLEAR_FILTER':
       return({

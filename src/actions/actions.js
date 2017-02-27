@@ -6,13 +6,26 @@ export function updatePlaces(placesArray) {
   }
 }
 
-export function filterPlaces(filtered) {
+export function searchPlaces(search) {
   return {
-    type: 'FILTER_PLACES',
-    payload: filtered
+    type: 'SEARCH_PLACES',
+    payload: search
   }
 }
 
+export function applyFilter(filterType, filteredPlaces) {
+  return {
+    type: 'APPLY_FILTER',
+    filterType,
+    filteredPlaces
+  }
+}
+
+export function clearSearch() {
+  return {
+    type: 'CLEAR_SEARCH'
+  }
+}
 export function clearFilter() {
   return {
     type: 'CLEAR_FILTER'

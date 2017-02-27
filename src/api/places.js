@@ -26,13 +26,21 @@ const places =  [
   },
   {
     id: 2, 
-    position: {lat: 22.624695, lng: 120.307813},
-    category: 'Outdoors',
-    subCategory: 'Camping',
-    title: "Brendan's House", 
-    imagesArray: [],
-    summary: '', 
-    phone: '',
+    position: {lat: 22.624647318807856, lng: 120.31548231840134},
+    category: 'Food',
+    subCategory: 'Bakery',
+    tags: [],
+    title: 'Shakespeare Bakery 莎士比亞烘培坊 - Guanghua Branch', 
+    imagesArray: [
+        'https://www.englishintaiwan.com/images/directory/shakespeare-boulangerie-zhong-hua-road-shakespeare-bakery-kaohsiung-awards-bread-pastry.jpg',
+    ],
+    summary: 'Good local chain with excellent raisin brioche', 
+    phone: '072231156',
+    address: 'No. 148-72, Guanghua 1st Rd, Lingya District, Kaohsiung City, 802',
+    hours: 'Everyday: 11:00 - 22:00',
+    website: 'http://www.shakespeare2010.com/',
+    description: `Cinnamon raisin brioche available for 90NT a loaf. Decent baguettes and assorted savory
+                breads. There are two branches in the city. The other is near Cultural Center.`    
   },
   {
     id: 3, 
@@ -52,6 +60,16 @@ const places =  [
     address: 'No. 45, Zhongzheng 2nd Rd, Lingya District, Kaohsiung City, 802',
     hours: 'Everyday: 05:30-23:00',
     website: 'http://www.nhspa.com.tw/',
+    description: `Nanhe has 2 swimming pools, one indoor, one outdoor (both roughly 25m). A slew of hot tubs
+    (including two outdoor Japanese style (one sulphur, one medicinal), an ice bath, saunas, steam rooms,
+    and a large variety of water massage jets. There is also a kids area with a water playground.
+
+    There is a small cafe inside, but there are no problems with bringing your own food and snacks. Water
+    machines are available with disposable cups. The outdoor area has reclining seats and tables and chairs
+    for enjoying the sun.
+
+    NOTE: Regular admittance is $250 but if you buy a ticket at any of the nearby swim shops, you should be able to 
+    get $140 tickets.`       
 
   },
   {
@@ -85,6 +103,9 @@ const places =  [
     tags: [],
     title: 'LiuJiang Lunch Box 劉江便當', 
     imagesArray: [
+    'http://pic.pimg.tw/lealea0614/1410971216-1977043824.jpg',
+    'https://pic.pimg.tw/ksdelicacy/1444474564-1320249904.jpg',
+    'http://pic.pimg.tw/ajmjjason/1387894763-391876035.jpg'
     ],
     summary: '', 
     phone: '',
@@ -102,6 +123,7 @@ const places =  [
     tags: [],
     title: 'Shoushan Bowling Alley 壽山保齡球館', 
     imagesArray: [
+    'http://pic.pimg.tw/smallchicken/1174575915.jpg'
     ],
     summary: '', 
     phone: '',
@@ -136,6 +158,8 @@ const places =  [
     tags: [],
     title: "L'atelier de pain", 
     imagesArray: [
+    'http://pic.pimg.tw/lu6627/9e9f0f6ea97b9355470cf5425c555f2f.jpg',
+    'http://pic.pimg.tw/lu6627/fc195fd3c5420c060e3a33e95bd7fd1e.jpg'
     ],
     summary: '', 
     phone: '',
@@ -153,13 +177,17 @@ const places =  [
     tags: [],
     title: 'Lahore Restaurant', 
     imagesArray: [
+    'http://2.bp.blogspot.com/-jNS6GGxugls/UoczQl6GhEI/AAAAAAAAAYo/60XQzZLJQHM/s1600/P1010919.JPG',
+    'http://3.bp.blogspot.com/-WRFx7ra7lL4/UoczqaTrulI/AAAAAAAAAY8/F-Zl1SetbS4/s1600/P1010931.JPG',
+    'http://i105.photobucket.com/albums/m237/owaism1971/menu-1.jpg'
     ],
-    summary: '', 
+    summary: 'Cheap Pakistani/Indian food with freshly made chapatis.', 
     phone: '',
     address: '',
     website: '',
     hours: '',
-    description: `Cheap Pakistani/Indian food with freshly made chapatis.`,
+    description: `Dishes range from $70 to about $130. Fresh made chapatis are $25 apiece. Lots of vegetarian
+                options available.`,
 
   },
   { 
@@ -168,15 +196,20 @@ const places =  [
     category: 'Food',
     subCategory: 'Bakery',
     tags: [],
-    title: "S'more Sugar II", 
+    title: "S'more Sugar II 法式手工甜點 - Cultural Center", 
     imagesArray: [
+        'https://farm4.staticflickr.com/3880/14998315575_dbd630a741_b.jpg',
+        'http://pic.pimg.tw/marukoharuko/1407381840-2393418484.jpg?v=1407381844',
+        'http://pic.pimg.tw/nellydyu/1379940905-607313254.jpg?v=1379940906'
     ],
-    summary: '', 
-    phone: '',
-    address: '',
-    website: '',
-    hours: '',
-    description: `The best patisserie in town!`,
+    summary: 'The best patisserie in town!', 
+    phone: '077279985',
+    address: '802, Kaohsiung City, Lingya District, Lane 38, Linquan St, 3號',
+    website: 'https://www.facebook.com/smoresugar.II/',
+    hours: 'Everyday: 12:00-19:00',
+    description: `One of two in the city, S'more Sugar has excellent tarts, scones, quiches and other
+                    assorted sweets. Prices aren't cheap, expect to spend $90-150 per item, but enjoy each
+                    scrumptious bite before you rush back for another one.`,
 
   },
   { 
@@ -185,15 +218,20 @@ const places =  [
     category: 'Food',
     subCategory: 'Bakery',
     tags: [],
-    title: "S'more Sugar", 
+    title: "S'more Sugar 法式手工甜點 - Arena", 
     imagesArray: [
+        'https://farm4.staticflickr.com/3880/14998315575_dbd630a741_b.jpg',
+        'http://pic.pimg.tw/marukoharuko/1407381840-2393418484.jpg?v=1407381844',
+        'http://pic.pimg.tw/nellydyu/1379940905-607313254.jpg?v=1379940906'
     ],
-    summary: '', 
-    phone: '',
+    summary: 'The best patisserie in town!', 
+    phone: '075566455',
     address: 'No. 167, Xinhai Rd, Zuoying District, Kaohsiung City, Taiwan 813',
-    website: '',
-    hours: '',
-    description: `The best patisserie in town!`,
+    website: 'https://www.facebook.com/SmoreSugar/',
+    hours: 'Monday-Saturday: 12:00-21:00, Sundays: 12:00-19:00',
+    description: `One of two in the city, S'more Sugar has excellent tarts, scones, quiches and other
+                    assorted sweets. Prices aren't cheap, expect to spend $90-150 per item, but enjoy each
+                    scrumptious bite before you rush back for another one.`,
 
   },
   { 
@@ -239,13 +277,21 @@ const places =  [
     tags: [],
     title: 'Katsicafé 卡茲咖啡', 
     imagesArray: [
+    'http://scontent.cdninstagram.com/t51.2885-15/s480x480/e35/c0.37.1080.1080/13099142_233391090360869_2074294848_n.jpg?ig_cache_key=MTI0MjczNTMxMDE4ODY2MzQ0MQ%3D%3D.2.c',
+    'http://scontent.cdninstagram.com/t51.2885-15/s480x480/e35/14717408_1682316832078963_8827054977588396032_n.jpg?ig_cache_key=MTM2NTczOTA1NzUzOTUyOTUxNQ%3D%3D.2',
+    'http://scontent.cdninstagram.com/t51.2885-15/s480x480/e35/14717354_188165351630414_5962657295505555456_n.jpg?ig_cache_key=MTM2ODk0OTQ3MTk1ODIyMzUwMA%3D%3D.2'
     ],
-    summary: '', 
+    summary: 'Excellent French/Mediterranean cuisine in a warm atmosphere', 
     phone: '',
     address: 'No. 1823, Jiuru 4th Rd, Gushan District, Kaohsiung City, Taiwan 804',
     website: 'https://www.facebook.com/katsicafe/',
     hours: '',
-    description: ``,
+    description: `There's nothing else like it in the city. IThe atmosphere is as warm and inviting
+    as being invited to your friend's house for dinner. The menu is huge and always changing. Most dishes
+    are Mediterranean or French cuisines. Prices range from $160 for pita wraps to $500 for steaks on special.
+
+    Just be prepared to wait. Dishes are prepared to order, so come here when you want a relaxing and convivial 
+    meal.`,
 
   },
 
@@ -294,7 +340,7 @@ const places =  [
     title: 'Chunlun Guaboa 春蘭割包', 
     imagesArray: [
     ],
-    summary: '', 
+    summary: 'The best Guabao (Taiwanese Hamburger) around', 
     phone: '07 201 7806',
     address: 'No. 5, Fuxing 1st Rd, Xinxing District, Kaohsiung City, Taiwan 800',
     website: '',
@@ -317,7 +363,8 @@ const places =  [
     address: 'No. 352, Wanshou Rd, Gushan District, Kaohsiung City, Taiwan 804',
     website: '',
     hours: '',
-    description: ``,
+    description: `This is the easiest approach to the mountain, but also the one that takes you off
+    the main path the quickest.`,
 
   },
   { 
@@ -397,10 +444,62 @@ const places =  [
     title: 'Arkansas Diner', 
     imagesArray: [
     ],
-    summary: '', 
+    summary: 'Best American (Southern-style) cuisine in town', 
     phone: '07 550 9177',
     address: '',
     website: 'http://www.arkansasdiner.com/',
+    hours: '',
+    description: `It'll stick to your ribs.`,
+
+  },
+  { 
+    id: 24, 
+    position: {lat: 22.660942691199086 , lng: 120.30156701803207},
+    category: '',
+    subCategory: '',
+    tags: [],
+    title: 'Cookbox/Pineapple Store/Wang Hing/旺來興食品原料量販店', 
+    imagesArray: [
+    ],
+    summary: 'Popular restaurant supply store', 
+    phone: '075505991',
+    address: 'No. 463, Mingcheng 3rd Rd, Gushan District, Kaohsiung City, Taiwan 804',
+    website: '',
+    hours: 'Everyday: 9:00-22:00',
+    description: `Excellent place to buy butter and heavy cream.`,
+
+  },
+  {
+    id: 25, 
+    position: {lat: 22.652445255384322, lng: 120.28788775205612},
+    category: 'Food',
+    subCategory: 'Bakery',
+    tags: [],
+    title: 'Shakespeare Bakery 莎士比亞烘培坊 - Art Museum Branch', 
+    imagesArray: [
+        'http://taiwanlocal.com/wp-content/uploads/2015/01/boulangerie_shakespeare.jpg',
+    ],
+    summary: 'Good local chain with excellent raisin brioche', 
+    phone: '072231156',
+    address: 'No. 49, Meishu East 2nd Rd, Gushan District, Kaohsiung City, Taiwan 804',
+    hours: 'Everyday: 11:00 - 22:00',
+    website: 'http://www.shakespeare2010.com/',
+    description: `Cinnamon raisin brioche available for 90NT a loaf. Decent baguettes and assorted savory
+                breads. There are two branches in the city. The other is near Cultural Center.`
+  },
+  { 
+    id: 24, 
+    position: {lat: 22.657195 , lng: 120.315802},
+    category: '',
+    subCategory: '',
+    tags: [],
+    title: '', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
     hours: '',
     description: ``,
 
@@ -422,7 +521,142 @@ const places =  [
     description: ``,
 
   },
+  { 
+    id: 24, 
+    position: {lat: 22.657195 , lng: 120.315802},
+    category: '',
+    subCategory: '',
+    tags: [],
+    title: '', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
 
+  },
+  { 
+    id: 24, 
+    position: {lat: 22.657195 , lng: 120.315802},
+    category: '',
+    subCategory: '',
+    tags: [],
+    title: '', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 24, 
+    position: {lat: 22.657195 , lng: 120.315802},
+    category: '',
+    subCategory: '',
+    tags: [],
+    title: '', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 24, 
+    position: {lat: 22.657195 , lng: 120.315802},
+    category: '',
+    subCategory: '',
+    tags: [],
+    title: '', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 24, 
+    position: {lat: 22.657195 , lng: 120.315802},
+    category: '',
+    subCategory: '',
+    tags: [],
+    title: '', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 24, 
+    position: {lat: 22.657195 , lng: 120.315802},
+    category: '',
+    subCategory: '',
+    tags: [],
+    title: '', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 24, 
+    position: {lat: 22.657195 , lng: 120.315802},
+    category: '',
+    subCategory: '',
+    tags: [],
+    title: '', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
+  { 
+    id: 24, 
+    position: {lat: 22.657195 , lng: 120.315802},
+    category: '',
+    subCategory: '',
+    tags: [],
+    title: '', 
+    imagesArray: [
+    ],
+    summary: '', 
+    phone: '',
+    address: '',
+    website: '',
+    hours: '',
+    description: ``,
+
+  },
 ]
 
 export default places;

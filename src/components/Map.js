@@ -64,9 +64,7 @@ class Map extends Component {
 
             marker.addListener('click', function() {
                 //this is to fix the multiple highlighted and animated markers. But requires looping through all markers.
-                //TODO: need to refactor code to start tracking current marker not just its id (which I'm not doing despite the bad variable name)
                 for (let i in self.props.maps.placesArray) {
-
                     self.props.maps.placesArray[i].marker.setAnimation(null)
                     self.props.maps.placesArray[i].marker.setIcon(self.props.maps.markerIcons[places[i].subCategory] || self.props.maps.markerIcons[places[i].category] || self.props.maps.markerIcons.Default);
                 }
@@ -156,57 +154,45 @@ class Map extends Component {
     }
 
     makeMarkerIcon(markerColor) {
-        const newMarker = new google.maps.MarkerImage(
-            'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor + '|40|_|%E2%80%A2',
-            new google.maps.Size(21, 34),
-            new google.maps.Point(0, 0),
-            new google.maps.Point(10, 34),
-            new google.maps.Size(21, 34)
-        );
+        const newMarker = {
+            url: 'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor + '|40|_|%E2%80%A2',
+            size: new google.maps.Size(21, 34),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(10, 34),
+            scaledSize: new google.maps.Size(21, 34)
+        };
+
         return newMarker
     }
 
-    //TODO
+    //FOR SEARCH AND FILTER
+
     filterMarkers() {
+        //reset all markers to visible
 		for (let i = 0; i < this.props.maps.placesArray.length; i++) {
 	    		this.props.maps.placesArray[i].marker.setMap(this.state.map)
 	    	}
-    	if (this.props.filterActive) {
+        //select correct array to filter markers based on
+        const filterArray = this.props.maps.filterActive && this.props.maps.searchActive ? 
+                        this.props.maps.foundPlaces : 
+                        this.props.maps.searchActive ? 
+                            this.props.maps.foundPlaces :
+                            this.props.maps.filterActive ?
+                                this.props.maps.filteredPlaces : 
+                                this.props.maps.placesArray
+
+        //Disconnect unwanted markers from map
+    	if (this.props.filterActive || this.props.searchActive) {
 	    	for (let i = 0; i < this.props.maps.placesArray.length; i++) {
-	    		if(!this.props.maps.filteredPlaces.includes(this.props.maps.placesArray[i])) {
+	    		if(!filterArray.includes(this.props.maps.placesArray[i])) {
 	    			this.props.maps.placesArray[i].marker.setMap(null)
 	    		} 
 	    	}
     	} 
 	}
- //    filterMarkers() {
- //    	if (this.props.filterActive) {
- //    	    	for (let i = 0; i < this.props.maps.placesArray.length; i++) {
- //    	    		if(this.props.maps.filteredPlaces.includes(this.props.maps.placesArray[i])) {
- //    	    			this.props.maps.placesArray[i].marker.setMap(this.state.map)
- //    	    		} else {
- //    	    			this.props.maps.placesArray[i].marker.setMap(null)
- //    	    		}
- //    	    	}
- //    	} else {
- //    		for (let i = 0; i < this.props.maps.placesArray.length; i++) {
- //    	    		this.props.maps.placesArray[i].marker.setMap(this.state.map)
- //    	    	}
-	//     }
-	// }
-    
 
 
 	//+++++++++++++++++REACT LIFECYCLE FUNCTIONS++++++++++++++++++++++++
-
-	//deprecated to allow component to rerender for marker filtering
-	// shouldComponentUpdate() {
-	// 	//do not let the map continue to rebuild on every update to Map component. instead updates will be handled by 
-	// 	//componentDidReceiveProps instead
-	// 	//question: does this mean I should not bind props to state here and instead only pass props to Map from App,
-	// 	//by binding am I negating the benefits of minimal component updates?
-	// 	return false;
-	// }
 
 	componentDidMount() {
 
@@ -240,9 +226,6 @@ class Map extends Component {
 		this.setState({loaded: false})
 	}
 
-	//deprecated
-	// componentWillReceiveProps() {
-	// }
 
 	render() {
 		if (this.state.loaded) {
