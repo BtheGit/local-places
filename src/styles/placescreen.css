@@ -12,6 +12,9 @@
 }
 
 .placescreen {
+	& .wrapper {
+		width: 100%;
+	}
 	& h1 {
 		font-weight: 100;
 		font-size: 2.2rem;
@@ -51,7 +54,7 @@
 					fill:none;stroke:#fff;stroke-width:1;stroke-miterlimit:10;stroke-opacity:0.75;
 				}
 				& .ripple-3 {
-					fill:none;stroke:#fff;stroke-width:1;stroke-miterlimit:10;stroke-opacity:0.5;					
+					fill:none;stroke:#fff;stroke-width:1;stroke-miterlimit:10;stroke-opacity:0.5;
 				}
 				position: absolute;
 				width: 100%;

@@ -12,7 +12,6 @@ import icons from '../media/inlineIcons'; //could also pass this down from app n
 class Sidebar extends Component {
 	constructor(props){
 		super(props)
-
 	}
 
 	buildSidebarPlaces = (placesArray) => {
@@ -22,7 +21,7 @@ class Sidebar extends Component {
 			const iconPath = icons[subCategory] || icons[category] || icons["Default"];
 			const iconClassName = `sidebar-icon sidebar-icon-${subCategory || category || 'Default' }`
 			const svgIcon = (<svg className={iconClassName} style={{fill: iconPath['color']}} key={i} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="-293.5 385 18 21" overflow="inherit">
-			<path fill-rule="evenodd" clip-rule="evenodd" d="M-275.5,394c0-5-4-9-9-9s-9,4-9,9c0,3.6,2.1,6.6,5.1,8.1l3.9,3.9l3.9-3.9C-277.6,400.6-275.5,397.6-275.5,394z"/>
+			<path d="M-275.5,394c0-5-4-9-9-9s-9,4-9,9c0,3.6,2.1,6.6,5.1,8.1l3.9,3.9l3.9-3.9C-277.6,400.6-275.5,397.6-275.5,394z"/>
 			</svg>);
 
 			const triggerText = [ svgIcon, placesArray[i].title ];
@@ -34,6 +33,7 @@ class Sidebar extends Component {
 					key={i}
 					//passed to Collapsible
 					trigger={ triggerText }
+					markerIcons={this.props.maps.markerIcons}
 					transitionTime={150}
 					classParentString={'collapsible-container'}
 					placeId={placeId}

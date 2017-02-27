@@ -24,7 +24,7 @@ class Place extends Component {
 
 
 		return(
-			<div>
+			<div className="wrapper">
 				<div className="hero-col">
 					<div className="col-inner-wrapper">
 						<a id="placescreen-btn-close" onClick={(e) => this.props.dispatch(hidePlacescreen())}>✕</a>

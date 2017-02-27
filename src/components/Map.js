@@ -30,7 +30,7 @@ class Map extends Component {
           mapTypeControl: false,
           styles: this.props.maps.styles[this.props.maps.currentMapStyle]
         });
-        this.setState({map})   		
+        this.setState({map})
 	}
 
 	//Markers are generated before the Google map. This injects the map reference into each marker after the map is generated.
@@ -75,7 +75,7 @@ class Map extends Component {
             });
 
             marker.addListener('mouseover', () => {
-                document.getElementById('place' + marker.id).classList.add('sidebar-place-manualHover'); //hover PlacesList elem
+                document.getElementById('place' + marker.id).classList.add('manual-hover'); //hover PlacesList elem
                 marker.setIcon(this.props.maps.markerIcons.Highlighted);
                 this.props.dispatch(highlightPlace(marker.id));
             });
@@ -83,7 +83,7 @@ class Map extends Component {
             marker.addListener('mouseout', () => {
                 //to avoid overwriting the highlighted bouncing effect too soon
                 if (marker.animation === null) {
-                    document.getElementById('place' + marker.id).classList.remove('sidebar-place-manualHover');
+                    document.getElementById('place' + marker.id).classList.remove('manual-hover');
                     marker.setIcon(this.props.maps.markerIcons[places[i].subCategory] || this.props.maps.markerIcons[places[i].category] || this.props.maps.markerIcons.Default);
                     this.props.dispatch(unhighlightPlace());
                 }
@@ -129,7 +129,7 @@ class Map extends Component {
     	    	    						</div>`;
             infowindow.setContent(newContent);
             infowindow.open(map, marker);
-            
+
             //infowindow button click function needs to be attached when the infowindow is changed and attaches to the DOM
             const detailButton = document.getElementById('infowindowDetailButton');
             detailButton.addEventListener('click', function() {
@@ -173,12 +173,12 @@ class Map extends Component {
 	    		this.props.maps.placesArray[i].marker.setMap(this.state.map)
 	    	}
         //select correct array to filter markers based on
-        const filterArray = this.props.maps.filterActive && this.props.maps.searchActive ? 
-                        this.props.maps.foundPlaces : 
-                        this.props.maps.searchActive ? 
+        const filterArray = this.props.maps.filterActive && this.props.maps.searchActive ?
+                        this.props.maps.foundPlaces :
+                        this.props.maps.searchActive ?
                             this.props.maps.foundPlaces :
                             this.props.maps.filterActive ?
-                                this.props.maps.filteredPlaces : 
+                                this.props.maps.filteredPlaces :
                                 this.props.maps.placesArray
 
         //Disconnect unwanted markers from map
@@ -186,9 +186,9 @@ class Map extends Component {
 	    	for (let i = 0; i < this.props.maps.placesArray.length; i++) {
 	    		if(!filterArray.includes(this.props.maps.placesArray[i])) {
 	    			this.props.maps.placesArray[i].marker.setMap(null)
-	    		} 
+	    		}
 	    	}
-    	} 
+    	}
 	}
 
 
@@ -218,7 +218,7 @@ class Map extends Component {
             .then(() => {
             	this.connectMarkers(this.props.maps.placesArray, this.state.map);
             	this.setState({loaded: true})
-            })		
+            })
 
 	}
 

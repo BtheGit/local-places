@@ -1,6 +1,10 @@
 //from https://github.com/glennflanagan/react-collapsible/
 import React from 'react';
 import SidebarPlace from './SidebarPlace';
+import {
+    highlightPlace,
+    unhighlightPlace
+} from '../actions/actions';
 
 var Collapsible = React.createClass({
 
@@ -181,6 +185,17 @@ var Collapsible = React.createClass({
     }, 50);
   },
 
+  handleHoverOn: function() {
+    this.props.place.marker.setIcon(this.props.markerIcons.Highlighted);
+    this.props.dispatch(highlightPlace(this.props.place.marker.id));
+  },
+
+  handleHoverOff: function() {
+    console.log(this.props.markerIcons);
+    this.props.place.marker.setIcon(this.props.markerIcons[this.props.place.subCategory] || this.props.markerIcons[this.props.place.category] || this.props.markerIcons.Default);
+    this.props.dispatch(unhighlightPlace());
+  },
+
   render: function () {
 
     var dropdownStyle = {
@@ -198,12 +213,12 @@ var Collapsible = React.createClass({
 
 
     return(
-      <div className={this.props.classParentString} >
+      <div className={this.props.classParentString} id={this.props.placeId} onMouseEnter={this.handleHoverOn} onMouseLeave={this.handleHoverOff}>
         <span className={this.props.classParentString + "__trigger" + ' ' + openClass} id={this.props.idParentString} onClick={this.handleTriggerClick}>{trigger}</span>
         <div className={this.props.classParentString + "__contentOuter" } ref="outer" style={dropdownStyle}>
           <div className={this.props.classParentString + "__contentInner"} ref="inner">
             <SidebarPlace
-              key={this.props.iterKey} 
+              key={this.props.iterKey}
               iterKey={this.props.iterKey}
               highlightSelectedPlace={this.props.highlightSelectedPlace}
               dispatch={this.props.dispatch}
