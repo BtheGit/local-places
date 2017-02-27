@@ -27,7 +27,7 @@ const places =  [
   {
     id: 2, 
     position: {lat: 22.624695, lng: 120.307813},
-    category: 'Outdoors',
+    category: 'Nature',
     subCategory: 'Camping',
     title: "Brendan's House", 
     imagesArray: [],

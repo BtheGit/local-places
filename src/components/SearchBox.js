@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {
-	filterPlaces,
-	clearFilter
+	searchPlaces,
+	clearSearch,
+	clearFilter,
+	applyFilter
 } from '../actions/actions';
 
 class SearchBox extends Component {
@@ -15,7 +17,7 @@ class SearchBox extends Component {
 
 		//Reset filterActive toggle so Markers and Sidebar generate based on default array not filtered array
 		if (event.target.value === '') {
-			this.props.dispatch(clearFilter());
+			this.props.dispatch(clearSearch());
 			return
 		}
 
@@ -27,20 +29,23 @@ class SearchBox extends Component {
 
 		//Populate filtered with arrays of matches for each search term individually
 		for (let i = 0; i < textArray.length; i++) {
-			filtered.push(wordFilter(textArray[i], this.props.maps.placesArray))
+			//if filter is active, use the filteredPlaces as the base for searches, else use all the places
+			const array = this.props.maps.filterActive ? this.props.maps.filteredPlaces : this.props.maps.placesArray; 
+			
+			filtered.push(wordFilter(textArray[i], array))
 		}
 
 		//Compare list of matches lists and save only the intersections (ones that are common to all)
 		if (filtered.length > 1) {
 			filtered = intersect(filtered);
-			this.props.dispatch(filterPlaces([...filtered]));
+			this.props.dispatch(searchPlaces([...filtered]));
 		} else if (filtered.length === 1){ 
 			if (filtered[0][0] !== ''){ //to avoid adding empty string to filtered list in store
-				this.props.dispatch(filterPlaces(filtered[0]));
+				this.props.dispatch(searchPlaces(filtered[0]));
 			}
 		} 
 
-
+		//TODO add in search of category, subcategory, and tags (which needs to be joined into one string)
 		function wordFilter (text, array) {
 			return array.filter((elem) => {
 				if (elem.title !== undefined && elem.description !== undefined) {
@@ -68,16 +73,47 @@ class SearchBox extends Component {
 		//TODO: change markers to render based on filteredPlaces, not placesArray (if filteredPlaces is empty, render placesArray)
 	}
 
+	//The filter will function more as a category than a standard filter. Applying it or removing it will reset searches,
+	//similar to going to a sub-category page in Tripadvisor.
+	applyFilter = (event) => {
+		const filter = event.target.value;
+		//reset search filter 
+		this.props.dispatch(clearSearch());
+		//set filterActive to false if 'all' is value, otherwise to true
+		if (filter === 'all') {
+			this.props.dispatch(clearFilter());
+		} else {
+			//create a new array filtered only by category 
+			//dispatch that array to the filteredPlaces (without triggering the searchActive toggle)                       
+			const filteredPlaces = this.props.maps.placesArray.filter(place => place.category.match(filter));
+			this.props.dispatch(applyFilter(filter, filteredPlaces))
+		}
+
+	}
+
+	//TODO move rendering of select form to separate function
+
 	render() {
 		return (
-			<div id="sidebar-search">
-				<input 
-					type="text"
-					onInput={this.filterSearch} 
-					className="search-input" 
-					placeholder="Search" 
-				/>
-				<a href="#" className="search-button">Search</a>
+			<div>
+				<div id="sidebar-search">
+					<input 
+						type="text"
+						onInput={this.filterSearch} 
+						className="search-input" 
+						placeholder="Search" 
+					/>
+					<a href="#" className="search-button">Search</a>
+				</div>
+				<div>
+					<select onChange={this.applyFilter}>
+						<option value="all">All</option>
+						<option value="Food">Food</option>
+						<option value="Nature">Outdoors</option>
+						<option value="Recreation">Recreation</option>
+						<option value="Medical">Medical</option>
+					</select>
+				</div>
 			</div>
 		)
 	}

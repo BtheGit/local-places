@@ -76,7 +76,14 @@ class Sidebar extends Component {
 			<div id="sidebar-container">
 				<SearchBox></SearchBox>
 				<div id="sidebar-list-container">
-					{this.props.maps.filterActive ? this.showPlaces(this.props.maps.filteredPlaces) : this.showPlaces(this.props.maps.placesArray)}
+					{this.props.maps.filterActive && this.props.maps.searchActive ? 
+						this.showPlaces(this.props.maps.foundPlaces) : 
+						this.props.maps.searchActive ? 
+							this.showPlaces(this.props.maps.foundPlaces) :
+							this.props.maps.filterActive ?
+								this.showPlaces(this.props.maps.filteredPlaces) : 
+								this.showPlaces(this.props.maps.placesArray)
+					}
 				</div>
 			</div>
 
