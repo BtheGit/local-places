@@ -1,7 +1,7 @@
 :root {
-    --color-category-1: #56dd8f;
-    --color-category-1-light: #6ce7a0;
-    --color-category-1-dark: #56ce89;
+    /*--color-category-food: #56dd8f;
+    --color-category-food-light: #6ce7a0;
+    --color-category-food-dark: #56ce89;*/
 }
 
 
@@ -39,7 +39,9 @@
 		color: #fff;
 		align-items: stretch;
 		text-align: center;
-		background: var(--color-category-1) url('../images/zigzag-bcg.png') repeat-y top left;
+		background-image: url('../images/zigzag-bcg.png');
+		background-repeat: repeat-y;
+		background-position: top left;
 		background-size: 18px;
 		& .img-circle-wrapper {
 			width: 250px;
@@ -80,9 +82,7 @@
 		& .website-link {
 			&:hover {
 				background: #fff;
-				color: var(--color-category-1-dark);
 			}
-			background: var(--color-category-1-dark);
 			display: inline-block;
 			padding: 4px 14px;
 			border-radius: 20px;
@@ -123,7 +123,6 @@
 		width: 40px;
 		display: inline-block;
 		margin: 20px 0;
-		border: 2px solid var(--color-category-1-light);
 	}
 	display: flex;
 	position: absolute;

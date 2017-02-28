@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+@import 'variables.css';
+@import 'categories.css';
 @import 'map.css';
 @import 'placescreen.css';
 @import 'sidebar.css';
