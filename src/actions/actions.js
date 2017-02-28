@@ -32,17 +32,6 @@ export function clearFilter() {
   }
 }
 
-export function highlightPlace(placeID) {
-  return {
-    type: 'HIGHLIGHT_PLACE',
-    payload: placeID
-  }
-}
-export function unhighlightPlace() {
-  return {
-    type: 'UNHIGHLIGHT_PLACE',
-  }
-}
 export function selectMarker(markerID) {
   return {
     type: 'SELECT_MARKER',

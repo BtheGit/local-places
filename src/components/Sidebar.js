@@ -33,7 +33,6 @@ class Sidebar extends Component {
 					key={i}
 					//passed to Collapsible
 					trigger={ triggerText }
-					markerIcons={this.props.maps.markerIcons}
 					transitionTime={150}
 					classParentString={'collapsible-container'}
 					placeId={placeId}

@@ -1,94 +1,47 @@
 //from https://github.com/glennflanagan/react-collapsible/
-import React from 'react';
+import React, { Component } from 'react';
 import SidebarPlace from './SidebarPlace';
-import {
-    highlightPlace,
-    unhighlightPlace
-} from '../actions/actions';
+import icons from '../media/inlineIcons';
 
-var Collapsible = React.createClass({
+class Collapsible extends Component {
 
-  //Set validation for prop types
-  propTypes: {
-    transitionTime: React.PropTypes.number,
-    easing: React.PropTypes.string,
-    open: React.PropTypes.bool,
-    classParentString: React.PropTypes.string,
-    accordionPosition: React.PropTypes.number,
-    handleTriggerClick: React.PropTypes.func,
-    // trigger: React.PropTypes.oneOfType([ //I overrode this rule to allow for inlining the SVG. If it breaks, this is probably why! :)
-    //   React.PropTypes.string,
-    //   React.PropTypes.element
-    // ]),
-    triggerWhenOpen:React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.element
-    ]),
-    overflowWhenOpen: React.PropTypes.oneOf([
-      'hidden',
-      'visible',
-      'auto',
-      'scroll',
-      'inherit',
-      'initial',
-      'unset'
-    ])
-  },
-
-  //If no transition time or easing is passed then default to this
-  getDefaultProps: function() {
-    return {
-      transitionTime: 400,
-      easing: 'linear',
-      open: false,
-      classParentString: 'Collapsible',
-      overflowWhenOpen: 'hidden'
-    };
-  },
-
-  //Defaults the dropdown to be closed
-  getInitialState: function(){
-
-    if(this.props.open){
-      return {
-        isClosed: false,
-        shouldSwitchAutoOnNextCycle: false,
-        height: 'auto',
-        transition: 'none',
-        hasBeenOpened: true,
-        overflow: this.props.overflowWhenOpen
-      }
-    }
-    else{
-      return {
+  constructor(props){
+    super(props);
+    this.state = {
         isClosed: true,
         shouldSwitchAutoOnNextCycle: false,
         height: 0,
         transition: 'height ' + this.props.transitionTime + 'ms ' + this.props.easing,
         hasBeenOpened: false,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        transitionTime: 400,
+        easing: 'linear',
+        open: false,
+        classParentString: 'Collapsible',
+        overflowWhenOpen: 'hidden'
       }
-    }
-  },
+
+
+  }
 
   // Taken from https://github.com/EvandroLG/transitionEnd/
   // Determines which prefixed event to listen for
-  whichTransitionEnd: function(element){
-      var transitions = {
+  whichTransitionEnd = (element) => {
+      const transitions = {
           'WebkitTransition' : 'webkitTransitionEnd',
           'MozTransition'    : 'transitionend',
           'OTransition'      : 'oTransitionEnd otransitionend',
           'transition'       : 'transitionend'
       };
 
-      for(var t in transitions){
+      for(let t in transitions){
           if(element.style[t] !== undefined){
               return transitions[t];
           }
       }
-  },
+  }
 
-  componentDidMount: function() {
+  componentDidMount = () => {
     //Set up event listener to listen to transitionend so we can switch the height from fixed pixel to auto for much responsiveness;
     //TODO:  Once Synthetic transitionend events have been exposed in the next release of React move this funciton to a function handed to the onTransitionEnd prop
 
@@ -100,9 +53,9 @@ var Collapsible = React.createClass({
       }
 
     });
-  },
+  }
 
-  componentDidUpdate: function(prevProps) {
+  componentDidUpdate = (prevProps) =>{
 
     if(this.state.shouldSwitchAutoOnNextCycle === true && this.state.isClosed === false) {
       //Set the height to auto to make compoenent re-render with the height set to auto.
@@ -125,56 +78,47 @@ var Collapsible = React.createClass({
         this.closeCollapsible();
       }
     }
-  },
+  }
 
 
-  handleTriggerClick: function(event) {
-
+  handleTriggerClick = (event) => {
     event.preventDefault();
-
-    if(this.props.handleTriggerClick) {
-      this.props.handleTriggerClick(this.props.accordionPosition);
+    if(this.state.isClosed === true){
+      this.openCollapsible();
     }
-    else{
-
-      if(this.state.isClosed === true){
-        this.openCollapsible();
-      }
-      else {
-        this.closeCollapsible();
-      }
+    else {
+      this.closeCollapsible();
     }
+  }
 
-  },
-
-  closeCollapsible: function() {
+  closeCollapsible = () => {
     this.setState({
       isClosed: true,
       shouldSwitchAutoOnNextCycle: true,
       height: this.refs.inner.offsetHeight,
       overflow: 'hidden',
     });
-  },
+  }
 
-  openCollapsible: function() {
+  openCollapsible = () => {
     this.setState({
       height: this.refs.inner.offsetHeight,
       transition: 'height ' + this.props.transitionTime + 'ms ' + this.props.easing,
       isClosed: false,
       hasBeenOpened: true
     });
-  },
+  }
 
-  makeResponsive: function() {
+  makeResponsive = () => {
     this.setState({
       height: 'auto',
       transition: 'none',
       shouldSwitchAutoOnNextCycle: false,
       overflow: this.props.overflowWhenOpen
     });
-  },
+  }
 
-  prepareToOpen: function() {
+  prepareToOpen = () => {
     //The height has been changes back to fixed pixel, we set a small timeout to force the CSS transition back to 0 on the next tick.
     window.setTimeout(() => {
       this.setState({
@@ -183,22 +127,19 @@ var Collapsible = React.createClass({
         transition: 'height ' + this.props.transitionTime + 'ms ' + this.props.easing
       });
     }, 50);
-  },
+  }
 
-  handleHoverOn: function() {
-    this.props.place.marker.setIcon(this.props.markerIcons.Highlighted);
-    this.props.dispatch(highlightPlace(this.props.place.marker.id));
-  },
+  // handleHoverOn: function() {
+  //   console.log(this.props.markerIcons);
+  //   this.props.place.marker.setIcon(this.props.markerIcons.Highlighted);
+  // },
 
-  handleHoverOff: function() {
-    console.log(this.props.markerIcons);
-    this.props.place.marker.setIcon(this.props.markerIcons[this.props.place.subCategory] || this.props.markerIcons[this.props.place.category] || this.props.markerIcons.Default);
-    this.props.dispatch(unhighlightPlace());
-  },
+  // handleHoverOff: function() {
+  //   this.props.place.marker.setIcon(this.props.markerIcons[this.props.place.subCategory] || this.props.markerIcons[this.props.place.category] || this.props.markerIcons.Default);
+  // },
 
-  render: function () {
-
-    var dropdownStyle = {
+  render = () => {
+    const dropdownStyle = {
       height: this.state.height,
       WebkitTransition: this.state.transition,
       msTransition: this.state.transition,
@@ -206,15 +147,11 @@ var Collapsible = React.createClass({
       overflow: this.state.overflow
     }
 
-    var openClass = this.state.isClosed ? 'is-closed' : 'is-open';
-
-    //If user wants different text when tray is open
-    var trigger = (this.state.isClosed === false) && (this.props.triggerWhenOpen !== undefined) ? this.props.triggerWhenOpen : this.props.trigger;
-
+    const openClass = this.state.isClosed ? 'is-closed' : 'is-open';
 
     return(
       <div className={this.props.classParentString} id={this.props.placeId} onMouseEnter={this.handleHoverOn} onMouseLeave={this.handleHoverOff}>
-        <span className={this.props.classParentString + "__trigger" + ' ' + openClass} id={this.props.idParentString} onClick={this.handleTriggerClick}>{trigger}</span>
+        <span className={this.props.classParentString + "__trigger" + ' ' + openClass} id={this.props.idParentString} onClick={this.handleTriggerClick}>{this.props.trigger}</span>
         <div className={this.props.classParentString + "__contentOuter" } ref="outer" style={dropdownStyle}>
           <div className={this.props.classParentString + "__contentInner"} ref="inner">
             <SidebarPlace
@@ -230,6 +167,6 @@ var Collapsible = React.createClass({
     );
   }
 
-});
+};
 
 export default Collapsible;

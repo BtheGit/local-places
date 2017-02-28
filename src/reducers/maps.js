@@ -44,7 +44,7 @@ const initialState = {
     searchActive: false,
     filteredPlaces: [],
     foundPlaces: [],
-    highlightedPlaceID: '',
+    // highlightedPlaceID: '',
     markerIcons: {},
     infoWindowIsActive: false,
     activeInfoWindow: {},

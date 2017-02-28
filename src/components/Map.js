@@ -6,8 +6,6 @@ import {
     selectMarker,
     focusInfoWindow,
     populateMarkers,
-    highlightPlace,
-    unhighlightPlace,
     addMarkerIcon,
     viewPlacescreen
 } from '../actions/actions';
@@ -77,7 +75,6 @@ class Map extends Component {
             marker.addListener('mouseover', () => {
                 document.getElementById('place' + marker.id).classList.add('manual-hover'); //hover PlacesList elem
                 marker.setIcon(this.props.maps.markerIcons.Highlighted);
-                this.props.dispatch(highlightPlace(marker.id));
             });
 
             marker.addListener('mouseout', () => {
@@ -85,7 +82,6 @@ class Map extends Component {
                 if (marker.animation === null) {
                     document.getElementById('place' + marker.id).classList.remove('manual-hover');
                     marker.setIcon(this.props.maps.markerIcons[places[i].subCategory] || this.props.maps.markerIcons[places[i].category] || this.props.maps.markerIcons.Default);
-                    this.props.dispatch(unhighlightPlace());
                 }
             });
 
@@ -172,6 +168,7 @@ class Map extends Component {
 		for (let i = 0; i < this.props.maps.placesArray.length; i++) {
 	    		this.props.maps.placesArray[i].marker.setMap(this.state.map)
 	    	}
+
         //select correct array to filter markers based on
         const filterArray = this.props.maps.filterActive && this.props.maps.searchActive ?
                         this.props.maps.foundPlaces :
@@ -201,6 +198,7 @@ class Map extends Component {
             })
             .then(() => {
                 //build generic infowindow which will be reused at each instance to prevent multiple instances
+                //TODO: store this in state
                 this.largeInfowindow = new google.maps.InfoWindow();
             })
             .then(() => {
