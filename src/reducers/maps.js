@@ -4,11 +4,18 @@ const initialState = {
     markerIsSelected: false,
     selectedMarker: 0,
     placesArray: [],
+    filterOptions: [
+      { value: 'all', label: 'All'},
+      { value: 'Food', label: 'Food'},
+      { value: 'Nature', label: 'Outdoors'},
+      { value: 'Recreation', label: 'Recreation'},
+      { value: 'Medical', label: 'Medical'}
+    ],
     styles: {
       default: [],
       brendan: [
         {"stylers": [{"saturation": 5}]},
-        {"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#3ec7c9"}]},        
+        {"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#3ec7c9"}]},
         {"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#aadd55"}, {"saturation": -20}]},
       ],
       mondrian: [
@@ -36,7 +43,7 @@ const initialState = {
          { "featureType": "transit", "elementType": "all", "stylers": [ { "saturation": -100 }, { "visibility": "simplified" } ] },
          { "featureType": "water", "elementType": "geometry", "stylers": [ { "hue": "#ffff00" }, { "lightness": -25 }, { "saturation": -97 } ] },
          { "featureType": "water", "elementType": "labels", "stylers": [ { "lightness": -25 }, { "saturation": -100 } ] }
-      ]  
+      ]
     },
     currentMapStyle: '',
     filterActive: false,

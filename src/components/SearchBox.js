@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
 import {connect} from 'react-redux';
 import {
 	searchPlaces,
@@ -10,6 +11,9 @@ import {
 class SearchBox extends Component {
 	constructor(props){
 		super(props)
+		this.state = {
+			selectedFilter: 'all'
+		}
 	}
 
 	filterSearch = (event) => {
@@ -30,8 +34,8 @@ class SearchBox extends Component {
 		//Populate filtered with arrays of matches for each search term individually
 		for (let i = 0; i < textArray.length; i++) {
 			//if filter is active, use the filteredPlaces as the base for searches, else use all the places
-			const array = this.props.maps.filterActive ? this.props.maps.filteredPlaces : this.props.maps.placesArray; 
-			
+			const array = this.props.maps.filterActive ? this.props.maps.filteredPlaces : this.props.maps.placesArray;
+
 			filtered.push(wordFilter(textArray[i], array))
 		}
 
@@ -39,11 +43,11 @@ class SearchBox extends Component {
 		if (filtered.length > 1) {
 			filtered = intersect(filtered);
 			this.props.dispatch(searchPlaces([...filtered]));
-		} else if (filtered.length === 1){ 
+		} else if (filtered.length === 1){
 			if (filtered[0][0] !== ''){ //to avoid adding empty string to filtered list in store
 				this.props.dispatch(searchPlaces(filtered[0]));
 			}
-		} 
+		}
 
 		//TODO add in search of category, subcategory, and tags (which needs to be joined into one string)
 		function wordFilter (text, array) {
@@ -55,7 +59,7 @@ class SearchBox extends Component {
 				} else if (elem.description !== undefined) {
 					return elem.description.toLowerCase().includes(text)
 				}
-				
+
 			})
 		}
 
@@ -64,7 +68,7 @@ class SearchBox extends Component {
 			let a = new Set(array[0]);
 			for (let i = 1; i < array.length; i++) {
 				let b = new Set(array[i]);
-				let intersection = new Set([...a].filter(x => b.has(x)));				
+				let intersection = new Set([...a].filter(x => b.has(x)));
 				a = [...intersection]; //converts Set of intersections back into array
 			}
 			return a;
@@ -75,16 +79,19 @@ class SearchBox extends Component {
 
 	//The filter will function more as a category than a standard filter. Applying it or removing it will reset searches,
 	//similar to going to a sub-category page in Tripadvisor.
-	applyFilter = (event) => {
-		const filter = event.target.value;
-		//reset search filter 
+	applyFilter = (option) => {
+		const filter = option.value;
+		this.setState({
+			selectedFilter: filter
+		});
+		//reset search filter
 		this.props.dispatch(clearSearch());
 		//set filterActive to false if 'all' is value, otherwise to true
 		if (filter === 'all') {
 			this.props.dispatch(clearFilter());
 		} else {
-			//create a new array filtered only by category 
-			//dispatch that array to the filteredPlaces (without triggering the searchActive toggle)                       
+			//create a new array filtered only by category
+			//dispatch that array to the filteredPlaces (without triggering the searchActive toggle)
 			const filteredPlaces = this.props.maps.placesArray.filter(place => place.category.match(filter));
 			this.props.dispatch(applyFilter(filter, filteredPlaces))
 		}
@@ -92,27 +99,41 @@ class SearchBox extends Component {
 	}
 
 	//TODO move rendering of select form to separate function
+	// <Select
+	//   name="form-field-name"
+	//   options={this.props.maps.filterOptions}
+	//   onChange={this.applyFilter}
+	// />
+
+	// <select onChange={this.applyFilter}>
+	// 	<option value="all">All</option>
+	// 	<option value="Food">Food</option>
+	// 	<option value="Nature">Outdoors</option>
+	// 	<option value="Recreation">Recreation</option>
+	// 	<option value="Medical">Medical</option>
+	// </select>
 
 	render() {
 		return (
 			<div>
 				<div id="sidebar-search">
-					<input 
+					<input
 						type="text"
-						onInput={this.filterSearch} 
-						className="search-input" 
-						placeholder="Search" 
+						onInput={this.filterSearch}
+						className="search-input"
+						placeholder="Search"
 					/>
 					<a href="#" className="search-button">Search</a>
 				</div>
 				<div>
-					<select onChange={this.applyFilter}>
-						<option value="all">All</option>
-						<option value="Food">Food</option>
-						<option value="Nature">Outdoors</option>
-						<option value="Recreation">Recreation</option>
-						<option value="Medical">Medical</option>
-					</select>
+				<Select
+				  className="filter-dropdown"
+					clearable={false}
+					searchable={false}
+					value={this.state.selectedFilter}
+				  options={this.props.maps.filterOptions}
+				  onChange={this.applyFilter}
+				/>
 				</div>
 			</div>
 		)

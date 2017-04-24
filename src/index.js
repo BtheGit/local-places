@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import { maps } from './reducers/index';
 import App from './App';
 import './styles/index.css';
+import 'react-select/dist/react-select.css';
 
 const store = applyMiddleware(thunk)(createStore)(combineReducers({maps}));
 

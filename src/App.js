@@ -5,9 +5,7 @@ import Mapscreen from './components/Map';
 import Placescreen from './components/Placescreen';
 import Formscreen from './components/Formscreen';
 import {connect} from 'react-redux';
-import {
-    updatePlaces,
-} from './actions/actions';
+import {updatePlaces} from './actions/actions';
 import placesFromDB from './api/places.js';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -28,7 +26,7 @@ class App extends Component {
         const placeElem = document.getElementById('place' + placeId);
         placeElem.classList.add('sidebar-place-selected');
 
-    }    
+    }
 
     componentDidMount() {
 		this.props.dispatch(updatePlaces(placesFromDB))
@@ -61,7 +59,7 @@ class App extends Component {
                           transitionLeaveTimeout = {300}>
                           {this.props.maps.placescreenActive ? this.renderPlacescreen() : false}
                       </ReactCSSTransitionGroup>
-                      <Mapscreen 
+                      <Mapscreen
                       	highlightSelectedPlace = {this.highlightSelectedPlace}
                       	filteredPlaces = {this.props.maps.filteredPlaces}
                       	searchActive = {this.props.maps.searchActive}
@@ -70,7 +68,7 @@ class App extends Component {
                       />
                   </div>
                   <div id="sidebar-component">
-                      <Sidebar 
+                      <Sidebar
                       	selectMenuItem = {this.selectMenuItem}
                       	highlightSelectedPlace = {this.highlightSelectedPlace}
                       />
