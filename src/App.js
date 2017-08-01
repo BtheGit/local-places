@@ -29,14 +29,16 @@ class App extends Component {
     }
 
     componentDidMount() {
-		this.props.dispatch(updatePlaces(placesFromDB))
+		    this.props.dispatch(updatePlaces(placesFromDB));
     }
 
     renderPlacescreen() {
-        //Because react doesn't let you pass an object as a child, array.filter returns an array with one element
-        //whereas array.find would return the object itself. I then extract the first element in the child component
+        //Because react doesn't let you pass an object as a child, 
+        // array.filter returns an array with one element
+        // whereas array.find would return the object itself. 
+        //We extract the first element in the child component
         const currentPlace = this.props.maps.placesArray.filter((place) => {
-            return place.id === this.props.maps.placescreenID
+            return place.id === this.props.maps.placescreenID;
         })
 
         return (

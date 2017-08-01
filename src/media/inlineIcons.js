@@ -25,29 +25,53 @@
 // }
 
 const icons = {
-	"Default": {color: '474747'},
+	"Default": {color: '1AFCFF'},
 	"Highlighted": {color: 'FFFF24'},
-	"Recreation": {color:  '757fba'},
-	"Food": {color:  'f0a275'},
-	"Restaurant": {color:  'f0a275'},
-	"Bakery": {color:  'f0a275'},
-	"Cafe": {color:  'f0a275'},
-	"Food Market":{color:  'f0a275'},
-	"Bowling Alley":{color:  '757fba'},
-	"Gym":{color:  '757fba'},
-	"Swimming Pool": {color:  '757fba'},
-	"Boardgames": {color: '757fba'},
-	"Camping":{color:  '56dd8f'},
-	"Hiking":{color:  '56dd8f'},
-	"Nature":{color:  '56dd8f'},
+	"Recreation": {color:  '0F32FF'},
+	"Food": {color:  'FFC018'},
+	"Restaurant": {color:  'FFC018'},
+	"Bakery": {color:  'FFC018'},
+	"Cafe": {color:  'FFC018'},
+	"Food Market":{color:  'FFC018'},
+	"Bowling Alley":{color:  '0F32FF'},
+	"Gym":{color:  '0F32FF'},
+	"Swimming Pool": {color:  '0F32FF'},
+	"Boardgames": {color: '0F32FF'},
+	"Camping":{color:  '00E561'},
+	"Hiking":{color:  '00E561'},
+	"Nature":{color:  '00E561'},
+	"Beach": {color:  '00E561'},
+	"Waterfall":{color:  '00E561'},
 	// "Doctor":{color:  '', path: ''},
 	// "Dentist":{color:  '', path: ''},
-	"Beach": {color:  '56dd8f'},
-	"Waterfall":{color:  '56dd8f'},
 	// "Temple":{color:  '', path: ''},
 
 
 }
+// const icons = {
+// 	"Default": {color: '474747'},
+// 	"Highlighted": {color: 'FFFF24'},
+// 	"Recreation": {color:  '757fba'},
+// 	"Food": {color:  'f0a275'},
+// 	"Restaurant": {color:  'f0a275'},
+// 	"Bakery": {color:  'f0a275'},
+// 	"Cafe": {color:  'f0a275'},
+// 	"Food Market":{color:  'f0a275'},
+// 	"Bowling Alley":{color:  '757fba'},
+// 	"Gym":{color:  '757fba'},
+// 	"Swimming Pool": {color:  '757fba'},
+// 	"Boardgames": {color: '757fba'},
+// 	"Camping":{color:  '56dd8f'},
+// 	"Hiking":{color:  '56dd8f'},
+// 	"Nature":{color:  '56dd8f'},
+// 	// "Doctor":{color:  '', path: ''},
+// 	// "Dentist":{color:  '', path: ''},
+// 	"Beach": {color:  '56dd8f'},
+// 	"Waterfall":{color:  '56dd8f'},
+// 	// "Temple":{color:  '', path: ''},
+
+
+// }
 
 
 export default icons;

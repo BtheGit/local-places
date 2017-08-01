@@ -86,21 +86,3 @@ export function changeMapStyle(style) {
   }
 }
 
-
-export function asyncHighlightPlace(placeID) {
-  return function (dispatch) {
-    dispatch(highlightPlace(placeID));
-  }
-}
-
-export function asyncUnhighlightPlace(placeID) {
-  return function (dispatch) {
-    dispatch(unhighlightPlace());
-  }
-}
-
-export function asyncPopulatePlacesList(placesList) {
-  return function (dispatch) {
-    dispatch(populatePlacesList(placesList));
-  }
-}

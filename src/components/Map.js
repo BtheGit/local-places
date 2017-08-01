@@ -229,6 +229,7 @@ class Map extends Component {
 		if (this.state.loaded) {
 			this.filterMarkers();
 		}
+        
 		return (
 			<div id="map" ref="map" style={{height: '100%'}}></div>
 		)

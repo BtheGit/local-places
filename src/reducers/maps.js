@@ -45,7 +45,7 @@ const initialState = {
          { "featureType": "water", "elementType": "labels", "stylers": [ { "lightness": -25 }, { "saturation": -100 } ] }
       ]
     },
-    currentMapStyle: '',
+    currentMapStyle: 'default',
     filterActive: false,
     filterType: '',
     searchActive: false,
